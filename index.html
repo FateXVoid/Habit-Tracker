@@ -517,8 +517,25 @@
         </div>
       </div>
       <div class="card">
+        <h2>🔗 Sync across your devices</h2>
+        <p style="font-size:12.5px;color:var(--ink-dim);line-height:1.5;margin:0 0 10px;">Put the <b style="color:var(--accent);">same code</b> on your phone and your PC and both will share the same habits/history — still no account, no email, no password. Anyone who has this exact code can see this data, so just keep it private like a password.</p>
+        <div class="field" style="margin-bottom:8px;">
+          <label>Sync code</label>
+          <input id="syncCodeInput" type="text" placeholder="e.g. nicco-habit-2026" autocomplete="off" autocapitalize="off" spellcheck="false">
+        </div>
+        <div class="gap">
+          <button class="btn small" id="syncSaveBtn">Save &amp; sync</button>
+          <button class="btn ghost small" id="syncGenBtn">Generate code</button>
+        </div>
+        <p id="syncStatus" style="font-size:11.5px;color:var(--ink-faint);margin:10px 0 0;">Not connected — this device is local-only.</p>
+        <div class="gap" style="margin-top:8px;">
+          <button class="btn ghost small" id="syncPullBtn">↻ Pull latest now</button>
+          <button class="btn ghost small" id="syncOffBtn">Turn off sync</button>
+        </div>
+      </div>
+      <div class="card">
         <h2>Your data</h2>
-        <p style="font-size:12.5px;color:var(--ink-faint);margin:0 0 10px;">No account needed — everything is saved privately on this device. Export a backup to move it to another device or browser.</p>
+        <p style="font-size:12.5px;color:var(--ink-faint);margin:0 0 10px;">No account needed — everything is saved privately on this device (and synced too, if you set a code above). Export a backup any time as an extra copy.</p>
         <div class="gap">
           <button class="btn small" id="exportBtn">⬇ Export backup</button>
           <button class="btn ghost small" id="importBtn">⬆ Import backup</button>
@@ -528,7 +545,7 @@
       </div>
       <div class="card">
         <h2>About</h2>
-        <p style="font-size:12.5px;color:var(--ink-faint);margin:0;">Habit Tracker · no login, no server · your data stays on this device.</p>
+        <p style="font-size:12.5px;color:var(--ink-faint);margin:0;">Habit Tracker · no login required · optional code-based sync across your own devices.</p>
       </div>
     </section>
   </main>
@@ -629,6 +646,107 @@
 
   function save(key, val){
     try{ localStorage.setItem(key, JSON.stringify(val)); }catch(e){}
+    scheduleSyncPush();
+  }
+
+  /* ============ optional code-based device sync (no login) ============
+     Not an account system: the code you type is just a shared key for one
+     row in the database. Anyone with the exact code can read/write it, so
+     it only works as "sync between my own devices", not as real security. */
+  var SUPABASE_URL = 'https://avzshytxewxocwrcyxli.supabase.co';
+  var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF2enNoeXR4ZXd4b2N3cmN5eGxpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk1NDY3MTgsImV4cCI6MjEwNTEyMjcxOH0.sSd0fM0B2426PE4MBInPpM4flYisTMXfdLUhbCPyBOQ';
+  var SYNC_KEY = 'habit_sync_code_v1';
+
+  function getSyncCode(){ try{ return (localStorage.getItem(SYNC_KEY) || '').trim(); }catch(e){ return ''; } }
+  function setSyncCodeStored(code){
+    try{
+      if(code) localStorage.setItem(SYNC_KEY, code);
+      else localStorage.removeItem(SYNC_KEY);
+    }catch(e){}
+  }
+
+  function collectLocalPayload(){
+    var out = {};
+    if(!STORAGE_OK) return out;
+    for(var i=0;i<localStorage.length;i++){
+      var k = localStorage.key(i);
+      if(k && k.indexOf('ht_')===0) out[k] = localStorage.getItem(k);
+    }
+    return out;
+  }
+
+  function applyRemotePayload(payload){
+    if(!STORAGE_OK || !payload) return;
+    Object.keys(localStorage).filter(function(k){return k.indexOf('ht_')===0;}).forEach(function(k){ localStorage.removeItem(k); });
+    Object.keys(payload).forEach(function(k){
+      if(k.indexOf('ht_')===0){
+        try{ localStorage.setItem(k, payload[k]); }catch(e){}
+      }
+    });
+  }
+
+  function setSyncStatus(msg, cls){
+    var el = document.getElementById('syncStatus');
+    if(!el) return;
+    el.textContent = msg;
+    el.style.color = cls==='ok' ? 'var(--sage)' : (cls==='err' ? 'var(--rust)' : 'var(--ink-faint)');
+  }
+
+  var syncPushTimer = null;
+  function scheduleSyncPush(){
+    if(!getSyncCode()) return;
+    clearTimeout(syncPushTimer);
+    syncPushTimer = setTimeout(pushSyncNow, 900);
+  }
+
+  function pushSyncNow(){
+    var code = getSyncCode();
+    if(!code) return Promise.resolve(false);
+    setSyncStatus('Syncing…');
+    return fetch(SUPABASE_URL+'/rest/v1/habit_tracker_sync', {
+      method:'POST',
+      headers:{
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': 'Bearer '+SUPABASE_ANON_KEY,
+        'Content-Type': 'application/json',
+        'Prefer': 'resolution=merge-duplicates,return=minimal'
+      },
+      body: JSON.stringify({ sync_code: code, data: collectLocalPayload(), updated_at: new Date().toISOString() })
+    }).then(function(res){
+      if(!res.ok) throw new Error('sync failed');
+      setSyncStatus('Synced just now · code: '+code, 'ok');
+      return true;
+    }).catch(function(){
+      setSyncStatus('Could not reach sync server — will retry on next change', 'err');
+      return false;
+    });
+  }
+
+  function pullSyncNow(){
+    var code = getSyncCode();
+    if(!code) return Promise.resolve(false);
+    return fetch(SUPABASE_URL+'/rest/v1/habit_tracker_sync?sync_code=eq.'+encodeURIComponent(code)+'&select=data,updated_at', {
+      headers:{ 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer '+SUPABASE_ANON_KEY }
+    }).then(function(res){
+      if(!res.ok) throw new Error('pull failed');
+      return res.json();
+    }).then(function(rows){
+      if(rows && rows[0] && rows[0].data){
+        applyRemotePayload(rows[0].data);
+        return true;
+      }
+      return false;
+    }).catch(function(){
+      setSyncStatus('Could not reach sync server', 'err');
+      return false;
+    });
+  }
+
+  function genSyncCode(){
+    var words = ['fox','maple','coral','ember','lotus','onyx','plum','sable','tide','wren','birch','jade'];
+    var w = words[Math.floor(Math.random()*words.length)];
+    var n = Math.floor(1000 + Math.random()*9000);
+    return w + '-' + n;
   }
 
   var LS = {
@@ -1341,6 +1459,12 @@
     setToggleUI('toggleNotif', settings.notifications);
     document.getElementById('weekStartSel').value = settings.weekStart;
 
+    var syncInput = document.getElementById('syncCodeInput');
+    var storedCode = getSyncCode();
+    if(syncInput && document.activeElement !== syncInput) syncInput.value = storedCode;
+    if(storedCode) setSyncStatus('Connected · code: '+storedCode, 'ok');
+    else setSyncStatus('Not connected — this device is local-only.');
+
     var remList = document.getElementById('reminderSettingsList');
     remList.innerHTML = "";
     if(!habits.length){
@@ -1551,6 +1675,41 @@
     settings.weekStart = parseInt(this.value,10); save(LS.settings, settings); renderAll();
   };
 
+  document.getElementById('syncGenBtn').onclick = function(){
+    document.getElementById('syncCodeInput').value = genSyncCode();
+  };
+  document.getElementById('syncSaveBtn').onclick = function(){
+    var code = (document.getElementById('syncCodeInput').value||'').trim();
+    if(!code){ toast('Type or generate a code first'); return; }
+    setSyncCodeStored(code);
+    setSyncStatus('Connecting…');
+    pullSyncNow().then(function(found){
+      if(found){
+        toast('Data pulled from your other device — reloading…');
+        setTimeout(function(){ location.reload(); }, 700);
+      } else {
+        return pushSyncNow().then(function(){
+          toast('Sync on — this device\'s data is now the starting point');
+          renderSettings();
+        });
+      }
+    });
+  };
+  document.getElementById('syncPullBtn').onclick = function(){
+    if(!getSyncCode()){ toast('Set a sync code first'); return; }
+    setSyncStatus('Checking for updates…');
+    pullSyncNow().then(function(found){
+      if(found){ toast('Latest data pulled — reloading…'); setTimeout(function(){ location.reload(); }, 700); }
+      else { toast('Nothing saved under that code yet'); renderSettings(); }
+    });
+  };
+  document.getElementById('syncOffBtn').onclick = function(){
+    if(!getSyncCode()){ toast('Sync is already off'); return; }
+    setSyncCodeStored('');
+    renderSettings();
+    toast('Sync turned off — data stays local only from now on');
+  };
+
   document.getElementById('exportBtn').onclick = function(){
     var payload = {};
     for(var i=0;i<localStorage.length;i++){
@@ -1593,6 +1752,7 @@
       try{
         var payload = JSON.parse(reader.result);
         Object.keys(payload).forEach(function(k){ localStorage.setItem(k, payload[k]); });
+        if(getSyncCode()){ try{ sessionStorage.removeItem('ht_sync_booted_'+getSyncCode()); }catch(e){} pushSyncNow(); }
         toast('Backup restored — reloading...');
         setTimeout(function(){ location.reload(); }, 900);
       }catch(err){ toast('That file could not be read'); }
@@ -1769,6 +1929,20 @@
   renderAll();
   renderCustomReminders();
   catchUpReminders();
+
+  /* pull the latest synced data once per tab, if a sync code is set */
+  (function(){
+    var code = getSyncCode();
+    if(!code) return;
+    var bootFlag = 'ht_sync_booted_'+code;
+    try{
+      if(sessionStorage.getItem(bootFlag)) return;
+      sessionStorage.setItem(bootFlag, '1');
+    }catch(e){}
+    pullSyncNow().then(function(found){
+      if(found) location.reload();
+    });
+  })();
 })();
 </script>
 </body>
