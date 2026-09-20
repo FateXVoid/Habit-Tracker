@@ -6,7 +6,7 @@
 <title>Habit Tracker</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg: #100f0e;
@@ -30,11 +30,11 @@
     --radius: 18px;
     --shadow-card: 0 10px 30px -12px rgba(0,0,0,.55), 0 1px 0 rgba(255,255,255,.03) inset;
     --shadow-pop: 0 16px 40px -14px rgba(0,0,0,.6);
-    --font-display: 'Sora', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   }
   *{box-sizing:border-box; -webkit-tap-highlight-color: transparent;}
   html,body{margin:0; padding:0; background:var(--bg); color:var(--ink);
-    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing:antialiased; overflow-x:hidden;}
   body{padding-bottom:88px; min-height:100vh; position:relative;
     background:
@@ -59,8 +59,8 @@
   .app{ position:relative; z-index:1; }
 
   .topbar{ padding: 26px 20px 10px; }
-  .topbar .eyebrow{ font-size:11.5px; color:var(--accent); letter-spacing:.14em; margin:0 0 4px; font-weight:800; text-transform:uppercase; }
-  .topbar h1{ margin:0; font-family:var(--font-display); font-size:28px; font-weight:800; letter-spacing:-0.01em;
+  .topbar .eyebrow{ font-size:11px; color:var(--accent); letter-spacing:.22em; margin:0 0 4px; font-weight:800; text-transform:uppercase; }
+  .topbar h1{ margin:0; font-family:var(--font-display); font-size:31px; font-weight:700; letter-spacing:-0.025em;
     background:linear-gradient(90deg, var(--ink) 30%, var(--accent-2)); -webkit-background-clip:text; background-clip:text; color:transparent;
     animation: riseIn .5s cubic-bezier(.2,.8,.3,1); }
   .topbar .sub{ margin:5px 0 0; color:var(--ink-dim); font-size:13.5px; }
@@ -96,8 +96,8 @@
     animation: cardIn .45s cubic-bezier(.2,.8,.3,1) both; }
   .card::before{ content:''; position:absolute; inset:0 0 auto 0; height:1px;
     background:linear-gradient(90deg, transparent, rgba(255,255,255,.14), transparent); }
-  .card h2{ margin:0 0 13px; font-family:var(--font-display); font-size:12.5px; color:var(--ink-dim); font-weight:700;
-    letter-spacing:.05em; text-transform:uppercase; display:flex; align-items:center; gap:6px; }
+  .card h2{ margin:0 0 13px; font-family:var(--font-display); font-size:11px; color:var(--ink-dim); font-weight:700;
+    letter-spacing:.14em; text-transform:uppercase; display:flex; align-items:center; gap:6px; }
   @keyframes cardIn{ from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:translateY(0);} }
 
   .habit-row{ display:flex; align-items:center; gap:10px; padding:12px 0; border-bottom:1px solid var(--line-soft);
@@ -165,9 +165,9 @@
   /* insights */
   .insight-text{ font-size:14px; line-height:1.55; color:var(--ink); }
   .insight-text b{ color:var(--accent); }
-  .stat-mini{ display:flex; gap:10px; margin-top:10px; flex-wrap:wrap; }
-  .stat-mini .pill{ background:var(--card-2); border:1px solid var(--line); border-radius:12px; padding:8px 12px; flex:1; min-width:110px; }
-  .stat-mini .pill .v{ font-size:17px; font-weight:800; color:var(--accent); }
+  .stat-mini{ display:grid; grid-template-columns:repeat(auto-fit, minmax(128px, 1fr)); gap:10px; margin-top:10px; }
+  .stat-mini .pill{ background:var(--card-2); border:1px solid var(--line); border-radius:12px; padding:9px 12px; min-width:0; }
+  .stat-mini .pill .v{ font-family:var(--font-display); font-size:18px; font-weight:700; color:var(--accent); letter-spacing:-0.01em; }
   .stat-mini .pill .l{ font-size:10.5px; color:var(--ink-faint); margin-top:2px; }
 
   .grid-scroll{ overflow-x:auto; -webkit-overflow-scrolling:touch; }
@@ -182,12 +182,12 @@
   .dotmark.on{ background:var(--sage); border-color:var(--sage); transform:scale(1.08); }
 
   .bars .bar-row{ display:flex; align-items:center; gap:10px; padding:8px 0; }
-  .bars .bar-row .lbl{ width:96px; font-size:12.5px; color:var(--ink-dim); flex:none;
+  .bars .bar-row .lbl{ width:112px; font-size:12.5px; color:var(--ink-dim); flex:none;
     white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
   .bars .bar-row .track{ flex:1; height:9px; background:var(--card-2); border-radius:6px; overflow:hidden; }
   .bars .bar-row .fill{ height:100%; background:linear-gradient(90deg, var(--accent-dim), var(--accent)); border-radius:6px;
     width:0; transition: width 1s cubic-bezier(.2,.8,.2,1); }
-  .bars .bar-row .pct{ width:36px; text-align:right; font-size:12px; color:var(--ink-faint); flex:none; }
+  .bars .bar-row .pct{ width:auto; min-width:56px; white-space:nowrap; text-align:right; font-size:11.5px; color:var(--ink-faint); flex:none; font-variant-numeric:tabular-nums; }
 
   .daily-chart{ display:flex; align-items:flex-end; gap:3px; height:90px; margin-top:6px; overflow-x:auto; }
   .daily-chart .col{ flex:none; width:8px; display:flex; align-items:flex-end; height:100%; }
@@ -220,10 +220,11 @@
   .empty{ text-align:center; color:var(--ink-faint); padding:30px 10px; font-size:13.5px; }
 
   nav.tabbar{ position:fixed; bottom:0; left:0; right:0; display:flex; background:rgba(23,22,19,.86);
+    background:color-mix(in srgb, var(--bg-elev) 88%, transparent);
     backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
     border-top:1px solid var(--line-soft); padding: 8px 10px calc(10px + env(safe-area-inset-bottom)); z-index:20;
     box-shadow: 0 -8px 24px rgba(0,0,0,.25); }
-  nav.tabbar button{ flex:1; background:none; border:none; color:var(--ink-faint); font-size:10.5px;
+  nav.tabbar button{ flex:1; background:none; border:none; color:var(--ink-faint); font-size:9.5px; letter-spacing:.06em; text-transform:uppercase;
     display:flex; flex-direction:column; align-items:center; gap:3px; padding:6px 0; font-weight:700;
     letter-spacing:.01em; transition: color .2s, transform .2s; }
   nav.tabbar button .ic{ font-size:19px; transition: transform .3s cubic-bezier(.5,1.8,.4,1); }
@@ -354,8 +355,33 @@
     85%{ transform:translate(-50%,-50%) scale(1) rotate(-3deg); opacity:1; }
     100%{ transform:translate(-50%,-50%) scale(.9) rotate(-3deg); opacity:0; }
   }
+
+  /* ============ THEMES ============ */
+  body[data-theme="tokyo"]{ --bg:#0b0b12; --bg-elev:#12121c; --card:#161624; --card-2:#1e1e30; --line:#2c2c44; --ink:#f2f2fa; --ink-dim:#a3a3c2; --ink-faint:#646480; }
+  body[data-theme="volt"]{ --bg:#0c0d08; --bg-elev:#14160d; --card:#181a10; --card-2:#20240f; --line:#333a20; --ink:#f4f8e8; --ink-dim:#a9b392; --ink-faint:#6b7357; }
+  body[data-theme="vapor"]{ --bg:#120a18; --bg-elev:#1a1022; --card:#201430; --card-2:#2a1a3e; --line:#42295c; --ink:#f6effc; --ink-dim:#b6a3c9; --ink-faint:#756384; }
+  body[data-theme="abyss"]{ --bg:#071014; --bg-elev:#0c1a20; --card:#10222b; --card-2:#16303c; --line:#234653; --ink:#eaf7f6; --ink-dim:#96b8bc; --ink-faint:#5b7a80; }
+  body[data-theme="ember"]{ --bg:#120b09; --bg-elev:#1b100c; --card:#221410; --card-2:#2e1a13; --line:#4c2a1d; --ink:#fdeee8; --ink-dim:#c2a294; --ink-faint:#7d6357; }
+  body[data-theme="moss"]{ --bg:#0a100b; --bg-elev:#111a12; --card:#16221a; --card-2:#1d2e21; --line:#31492f; --ink:#eef6ea; --ink-dim:#a4b89b; --ink-faint:#66785e; }
+  body[data-theme="terminal"]{ --bg:#050805; --bg-elev:#0a120a; --card:#0e1a0e; --card-2:#122412; --line:#1f3a1f; --ink:#d8ffd8; --ink-dim:#7fbf7f; --ink-faint:#4a7a4a; }
+  body[data-theme="sakura"]{ --bg:#fdf3f5; --bg-elev:#ffffff; --card:#ffffff; --card-2:#fbe9ee; --line:#f0d3dc; --ink:#33202a; --ink-dim:#7d5a68; --ink-faint:#a98a95; }
+  body[data-theme="paper"]{ --bg:#f6f6f3; --bg-elev:#ffffff; --card:#ffffff; --card-2:#eef0ea; --line:#dfe2d8; --ink:#1c1e1a; --ink-dim:#5c6156; --ink-faint:#8d9284; }
+  body[data-theme="royal"]{ --bg:#0d0a1e; --bg-elev:#151030; --card:#1b153d; --card-2:#241b4e; --line:#3a2d6e; --ink:#efecff; --ink-dim:#a89ed0; --ink-faint:#6d6494; }
+
+  /* theme picker */
+  .theme-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin-bottom:6px; }
+  @media(min-width:560px){ .theme-grid{ grid-template-columns:repeat(3,1fr); } }
+  .theme-card{ border:2px solid var(--line); border-radius:14px; padding:10px; cursor:pointer;
+    background:var(--card-2); transition:transform .15s, border-color .2s, box-shadow .2s; text-align:left; }
+  .theme-card:active{ transform:scale(.96); }
+  .theme-card.active{ border-color:var(--accent); box-shadow:0 0 16px var(--accent-soft); }
+  .theme-card .pv{ height:42px; border-radius:9px; margin-bottom:8px; display:flex; gap:4px; padding:5px; border:1px solid rgba(0,0,0,.15); }
+  .theme-card .pv span{ flex:1; border-radius:5px; }
+  .theme-card .tn{ font-size:12.5px; font-weight:800; letter-spacing:.01em; }
+  .theme-card .td{ font-size:10px; color:var(--ink-faint); margin-top:2px; }
 </style>
 
+<base target="_blank">
 </head>
 <body>
 
@@ -444,6 +470,34 @@
         This grid resets automatically on the 1st of each month. Past months are saved in History.</p>
     </section>
 
+    <!-- STATS (all-time detailed) -->
+    <section class="view" id="view-stats">
+      <div class="card" style="animation-delay:.02s">
+        <h2>📊 All-time overview</h2>
+        <div class="stat-mini" id="stOverview"></div>
+      </div>
+      <div class="card" style="animation-delay:.06s">
+        <h2>🔥 Streaks right now</h2>
+        <div id="stStreaks"></div>
+      </div>
+      <div class="card" style="animation-delay:.1s">
+        <h2>📈 Month-by-month trend</h2>
+        <div class="bars" id="stTrend"></div>
+      </div>
+      <div class="card" style="animation-delay:.14s">
+        <h2>🎯 All-time progress by habit</h2>
+        <div id="stHabitDetail"></div>
+      </div>
+      <div class="card" style="animation-delay:.18s">
+        <h2>🗓️ Best weekday (all-time)</h2>
+        <div class="weekday-chart" id="stWeekday"></div>
+      </div>
+      <div class="card" style="animation-delay:.22s">
+        <h2>🏅 Records</h2>
+        <div id="stRecords"></div>
+      </div>
+    </section>
+
     <!-- HISTORY -->
     <section class="view" id="view-history">
       <div class="card">
@@ -455,7 +509,15 @@
     <!-- SETTINGS -->
     <section class="view" id="view-settings">
       <div class="card">
-        <h2>Accent color</h2>
+        <h2>🎨 Theme</h2>
+        <div class="row-between" style="margin-bottom:4px;">
+          <div>
+            <div style="font-size:15px;font-weight:800;font-family:var(--font-display);" id="themeCurrentName">Midnight Brass</div>
+            <div style="font-size:11.5px;color:var(--ink-faint);margin-top:2px;">Current theme · 10 styles</div>
+          </div>
+          <button class="btn small" id="openThemeModalBtn">Browse ✦</button>
+        </div>
+        <div style="font-size:10px;color:var(--ink-faint);margin:12px 0 7px;text-transform:uppercase;letter-spacing:.1em;font-weight:800;">Custom accent override</div>
         <div class="swatch-row" id="colorSwatches"></div>
       </div>
       <div class="card">
@@ -552,10 +614,11 @@
 </div>
 
 <nav class="tabbar">
-  <button data-view="today" class="active"><span class="ic">&#9733;</span>Today</button>
-  <button data-view="month"><span class="ic">&#9642;</span>Month</button>
-  <button data-view="history"><span class="ic">&#8635;</span>History</button>
-  <button data-view="settings"><span class="ic">&#9881;</span>Settings</button>
+  <button data-view="today" class="active"><span class="ic">🌟</span>Today</button>
+  <button data-view="month"><span class="ic">🗓️</span>Month</button>
+  <button data-view="stats"><span class="ic">📊</span>Stats</button>
+  <button data-view="history"><span class="ic">🕘</span>History</button>
+  <button data-view="settings"><span class="ic">⚙️</span>Settings</button>
 </nav>
 
 <div class="toast-stack" id="toastStack"></div>
@@ -621,6 +684,27 @@
       <button class="btn block" id="crConfirmBtn">Confirm</button>
       <button class="btn ghost block" id="crCancelBtn">Cancel</button>
     </div>
+  </div>
+</div>
+
+<!-- month-start recap modal -->
+<!-- theme picker modal -->
+<div class="modal-backdrop" id="themeModalBackdrop">
+  <div class="modal">
+    <h3>🎨 Pick your vibe</h3>
+    <div class="theme-grid" id="themeGrid"></div>
+    <button class="btn ghost block" id="themeModalCloseBtn">Close</button>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="recapModalBackdrop">
+  <div class="modal">
+    <h3 id="recapTitle">📅 Month recap</h3>
+    <div class="stat-mini" id="recapPills"></div>
+    <div class="insight-text" id="recapText" style="margin-top:12px;">—</div>
+    <h2 style="margin:16px 0 6px;font-family:var(--font-display);font-size:12.5px;color:var(--ink-dim);font-weight:700;letter-spacing:.05em;text-transform:uppercase;">By habit</h2>
+    <div class="bars" id="recapBars"></div>
+    <button class="btn block" id="recapCloseBtn">New month, let's go 🚀</button>
   </div>
 </div>
 
@@ -777,6 +861,7 @@
     var y = parseInt(key.slice(0,4),10), m = parseInt(key.slice(5,7),10);
     return new Date(y, m, 0).getDate();
   }
+  function shortMonthLabel(key){ var m=parseInt(key.slice(5,7),10)-1; return MONTH_NAMES[m].slice(0,3)+" "+key.slice(2,4); }
   function monthLabel(key){
     var y = key.slice(0,4), m = parseInt(key.slice(5,7),10)-1;
     return MONTH_NAMES[m] + " " + y;
@@ -807,6 +892,66 @@
   }
   applyAccent();
   applyIntense();
+
+  /* ============ themes (full palettes, picked via Settings popup) ============ */
+  var THEMES = [
+    { id:'midnight', name:'Midnight Brass', desc:'Dark · classic gold',   accent:'#d9ae53', dim:'#8a7238', vars:null },
+    { id:'tokyo',    name:'Tokyo Neon',     desc:'Dark · hot pink glow',  accent:'#ff2e88', dim:'#8f1c50', vars:{bg:'#0b0b12',card:'#161624',ink:'#f2f2fa'} },
+    { id:'volt',     name:'Volt',           desc:'Dark · electric lime',  accent:'#c8f542', dim:'#6d8a1e', vars:{bg:'#0c0d08',card:'#181a10',ink:'#f4f8e8'} },
+    { id:'vapor',    name:'Vapor Sunset',   desc:'Dark · purple haze',    accent:'#c084fc', dim:'#7442a8', vars:{bg:'#120a18',card:'#201430',ink:'#f6effc'} },
+    { id:'abyss',    name:'Abyss',          desc:'Dark · deep ocean',     accent:'#38d3c2', dim:'#1d7a70', vars:{bg:'#071014',card:'#10222b',ink:'#eaf7f6'} },
+    { id:'ember',    name:'Ember',          desc:'Dark · fire red',       accent:'#ff5a3c', dim:'#93301c', vars:{bg:'#120b09',card:'#221410',ink:'#fdeee8'} },
+    { id:'royal',    name:'Royal',          desc:'Dark · deep violet',    accent:'#a78bfa', dim:'#5b4391', vars:{bg:'#0d0a1e',card:'#1b153d',ink:'#efecff'} },
+    { id:'moss',     name:'Moss',           desc:'Dark · forest green',   accent:'#8fce6e', dim:'#4f7a3a', vars:{bg:'#0a100b',card:'#16221a',ink:'#eef6ea'} },
+    { id:'terminal', name:'Terminal',       desc:'Dark · hacker green',   accent:'#39ff6a', dim:'#1d8f3c', vars:{bg:'#050805',card:'#0e1a0e',ink:'#d8ffd8'} },
+    { id:'sakura',   name:'Sakura',         desc:'Light · soft pink',     accent:'#e5588f', dim:'#a33a64', vars:{bg:'#fdf3f5',card:'#ffffff',ink:'#33202a'} },
+    { id:'paper',    name:'Paper',          desc:'Light · clean minimal', accent:'#3b6fe0', dim:'#27478f', vars:{bg:'#f6f6f3',card:'#ffffff',ink:'#1c1e1a'} }
+  ];
+  if(typeof settings.theme === 'undefined') settings.theme = 'midnight';
+  function setAccentVars(hex, dim){
+    var r = document.documentElement.style;
+    r.setProperty('--accent', hex);
+    r.setProperty('--accent-dim', dim);
+    r.setProperty('--accent-soft', hex + '29');
+  }
+  function applyTheme(id, silent){
+    var t = THEMES.filter(function(x){ return x.id===id; })[0] || THEMES[0];
+    settings.theme = t.id;
+    if(t.id === 'midnight') document.body.removeAttribute('data-theme');
+    else document.body.setAttribute('data-theme', t.id);
+    setAccentVars(t.accent, t.dim);
+    if(!silent) save(LS.settings, settings);
+    var nm = document.getElementById('themeCurrentName');
+    if(nm) nm.textContent = t.name;
+  }
+  applyTheme(settings.theme, true);
+
+  function buildThemeGrid(){
+    var grid = document.getElementById('themeGrid');
+    if(!grid) return;
+    grid.innerHTML = '';
+    THEMES.forEach(function(t){
+      var v = t.vars || {bg:'#100f0e', card:'#1c1b17', ink:'#f3efe2'};
+      var el = document.createElement('div');
+      el.className = 'theme-card' + (settings.theme===t.id ? ' active' : '');
+      el.innerHTML =
+        '<div class="pv" style="background:'+v.bg+';">'+
+          '<span style="background:'+v.card+';"></span>'+
+          '<span style="background:'+t.accent+';"></span>'+
+          '<span style="background:'+v.card+';"></span></div>'+
+        '<div class="tn" style="color:'+v.ink+';">'+t.name+(settings.theme===t.id?' ✦':'')+'</div>'+
+        '<div class="td">'+t.desc+'</div>';
+      el.onclick = function(){
+        applyTheme(t.id);
+        buildThemeGrid();
+        vibrate(20);
+        toast('Theme: ' + t.name);
+      };
+      grid.appendChild(el);
+    });
+  }
+  function openThemeModal(){ buildThemeGrid(); document.getElementById('themeModalBackdrop').classList.add('open'); }
+  function closeThemeModal(){ document.getElementById('themeModalBackdrop').classList.remove('open'); }
 
   /* ============ habits ============ */
   var DEFAULT_HABITS = [
@@ -1036,6 +1181,35 @@
       save(LS.archive, archive);
       if(oldStats.overallPct >= 0.999) earnBadge('perfectmonth');
     }
+
+    // ---- build a detailed recap of the month that just ended, shown when the new month starts ----
+    (function(){
+      var ry = parseInt(stored.slice(0,4),10), rm = parseInt(stored.slice(5,7),10)-1;
+      var dowSum=[0,0,0,0,0,0,0], dowCnt=[0,0,0,0,0,0,0];
+      var activeDays=0, perfectDays=0;
+      for(var day=1; day<=oldNumDays; day++){
+        var dow = new Date(ry,rm,day).getDay();
+        var applicable = oldHabits.filter(function(h){ return !h.days || h.days.indexOf(dow)!==-1; });
+        if(!applicable.length) continue;
+        var doneToday = 0;
+        applicable.forEach(function(h){
+          var mm = oldData.marks[h.id]||{};
+          if(mm[day]) doneToday++;
+        });
+        if(doneToday>0) activeDays++;
+        if(doneToday===applicable.length) perfectDays++;
+        dowSum[dow]+= doneToday/applicable.length; dowCnt[dow]++;
+      }
+      var avg = dowSum.map(function(s,i){ return dowCnt[i]? s/dowCnt[i] : 0; });
+      var bestDow = avg.indexOf(Math.max.apply(null, avg));
+      save('ht_pending_recap_v1', {
+        month: stored, label: monthLabel(stored),
+        overallPct: oldStats.overallPct, totalDone: oldStats.totalDone, totalGoal: oldStats.totalGoal,
+        perHabit: oldStats.perHabit, activeDays: activeDays, perfectDays: perfectDays,
+        bestDow: dowCnt[bestDow]? bestDow : -1, days: oldNumDays
+      });
+    })();
+
     save(LS.currentMonth, todayKey);
   }
   rollover();
@@ -1512,6 +1686,208 @@
     el.classList.toggle('on', !!on);
   }
 
+  /* ============ all-time stats (detailed Stats page) ============ */
+  function computeAllTimeStats(){
+    var archive = load(LS.archive, []);
+    var monthKeys = archive.map(function(a){ return a.month; });
+    if(monthKeys.indexOf(todayKey) === -1) monthKeys.push(todayKey);
+    monthKeys.sort();
+    var perHabit = {};
+    habits.forEach(function(h){ perHabit[h.id] = { id:h.id, name:h.name, icon:h.icon, done:0, goal:0 }; });
+    var totalDone=0, totalGoal=0, activeDays=0, perfectDays=0, scheduledDays=0;
+    var dowSum=[0,0,0,0,0,0,0], dowCnt=[0,0,0,0,0,0,0];
+    var trend=[];
+    monthKeys.forEach(function(mk){
+      var y=parseInt(mk.slice(0,4),10), mo=parseInt(mk.slice(5,7),10)-1;
+      var nd=daysInMonth(mk);
+      var d=readMonth(mk);
+      var lastDay = (mk===todayKey) ? todayDay : nd;
+      var mDone=0, mGoal=0, mActive=0, mPerfect=0;
+      for(var day=1; day<=lastDay; day++){
+        var dow=new Date(y,mo,day).getDay();
+        var applicable=habitsForDay(dow);
+        if(!applicable.length) continue;
+        scheduledDays++;
+        var doneToday=0;
+        applicable.forEach(function(h){
+          var mm=d.marks[h.id]||{};
+          if(mm[day]){ doneToday++; perHabit[h.id].done++; totalDone++; mDone++; }
+          perHabit[h.id].goal++; totalGoal++; mGoal++;
+        });
+        if(doneToday>0){ activeDays++; mActive++; }
+        if(doneToday===applicable.length){ perfectDays++; mPerfect++; }
+        dowSum[dow]+= doneToday/applicable.length; dowCnt[dow]++;
+      }
+      trend.push({ month:mk, label:monthLabel(mk), pct:mGoal? mDone/mGoal:0, done:mDone, goal:mGoal,
+        active:mActive, perfect:mPerfect, days:lastDay, current:(mk===todayKey) });
+    });
+    var habitList = habits.map(function(h){
+      var p=perHabit[h.id];
+      return { id:h.id, name:h.name, icon:h.icon, done:p.done, goal:p.goal,
+        pct:p.goal? p.done/p.goal:0, current:currentStreak(h.id), best:bestStreaks[h.id]||0 };
+    });
+    return {
+      perHabit:habitList, totalDone:totalDone, totalGoal:totalGoal,
+      overallPct:totalGoal? totalDone/totalGoal:0,
+      activeDays:activeDays, perfectDays:perfectDays, scheduledDays:scheduledDays,
+      dow:dowSum.map(function(s,i){ return dowCnt[i]? s/dowCnt[i]:0; }),
+      trend:trend, months:monthKeys.length
+    };
+  }
+
+  function barRowEl(lbl, pct, right, delay){
+    var row=document.createElement('div');
+    row.className='bar-row';
+    row.innerHTML='<div class="lbl">'+lbl+'</div>'+
+      '<div class="track"><div class="fill"></div></div>'+
+      '<div class="pct">'+(right!==undefined? right : Math.round(pct*100)+'%')+'</div>';
+    var fillEl=row.querySelector('.fill');
+    setTimeout(function(){ fillEl.style.width=Math.round(pct*100)+'%'; }, 30+(delay||0));
+    return row;
+  }
+
+  function renderStats(){
+    var s=computeAllTimeStats();
+    var ov=document.getElementById('stOverview');
+    ov.innerHTML='';
+    [
+      { v: Math.round(s.overallPct*100)+'%', l:'All-time completion' },
+      { v: s.totalDone, l:'Total checkmarks' },
+      { v: s.activeDays+'/'+s.scheduledDays, l:'Active days' },
+      { v: s.perfectDays, l:'Perfect days' },
+      { v: s.months, l:'Months tracked' }
+    ].forEach(function(p){
+      var d=document.createElement('div'); d.className='pill';
+      d.innerHTML='<div class="v">'+p.v+'</div><div class="l">'+p.l+'</div>';
+      ov.appendChild(d);
+    });
+
+    // streaks now
+    var st=document.getElementById('stStreaks');
+    st.innerHTML='';
+    var sorted=s.perHabit.slice().sort(function(a,b){ return b.current-a.current; });
+    sorted.forEach(function(p){
+      if(p.current<1 && p.best<1) return;
+      var row=document.createElement('div');
+      row.className='bar-row';
+      row.innerHTML='<div class="lbl">'+(p.current>=3?'🔥 ':'')+p.icon+' '+p.name+'</div>'+
+        '<div class="track"><div class="fill" style="width:'+Math.min(100,p.current*7)+'%"></div></div>'+
+        '<div class="pct">'+p.current+'d'+(p.best>p.current?' <span style="color:var(--ink-faint);font-size:10px;">(best '+p.best+'d)</span>':'')+'</div>';
+      st.appendChild(row);
+    });
+    if(!st.children.length) st.innerHTML='<div class="empty">No streaks yet — check something off today to start one.</div>';
+
+    // month-by-month trend
+    var tr=document.getElementById('stTrend');
+    tr.innerHTML='';
+    s.trend.forEach(function(m,i){
+      tr.appendChild(barRowEl(shortMonthLabel(m.month||'')+(m.current?' ✦':''), m.pct, Math.round(m.pct*100)+'%', i*40));
+    });
+    if(!s.trend.length) tr.innerHTML='<div class="empty">No month data yet.</div>';
+
+    // all-time per-habit detail (done/goal + pct + streaks)
+    var hd=document.getElementById('stHabitDetail');
+    hd.innerHTML='';
+    s.perHabit.forEach(function(p,i){
+      var row=barRowEl(p.icon+' '+p.name, p.pct, p.done+'/'+p.goal+' · '+Math.round(p.pct*100)+'%', i*40);
+      hd.appendChild(row);
+      var sub=document.createElement('div');
+      sub.style.cssText='font-size:10.5px;color:var(--ink-faint);margin:-2px 0 8px 122px;';
+      sub.textContent='current streak '+p.current+'d · best ever '+p.best+'d';
+      hd.appendChild(sub);
+    });
+    if(!s.perHabit.length) hd.innerHTML='<div class="empty">No habits yet.</div>';
+
+    // best weekday all-time
+    var order = settings.weekStart===1 ? [1,2,3,4,5,6,0] : [0,1,2,3,4,5,6];
+    var maxV = Math.max.apply(null, s.dow.concat([0.0001]));
+    var wchart=document.getElementById('stWeekday');
+    wchart.innerHTML='';
+    order.forEach(function(dowIdx){
+      var col=document.createElement('div');
+      col.className='wcol'+(s.dow[dowIdx]===maxV && maxV>0?' best':'');
+      var track=document.createElement('div'); track.className='wtrack';
+      var fill=document.createElement('div'); fill.className='wfill';
+      track.appendChild(fill);
+      var lbl=document.createElement('div'); lbl.className='wlbl';
+      lbl.textContent=WD_NAMES[dowIdx]+' '+(s.dow[dowIdx]?Math.round(s.dow[dowIdx]*100):0)+'%';
+      col.appendChild(track); col.appendChild(lbl);
+      wchart.appendChild(col);
+      setTimeout(function(){ fill.style.height=Math.round(s.dow[dowIdx]*100)+'%'; }, 30);
+    });
+
+    // records
+    var rec=document.getElementById('stRecords');
+    rec.innerHTML='';
+    var bestCur={name:'—',v:0}, bestEver={name:'—',v:0}, bestMonth={label:'—',v:0}, mostPerfect={label:'—',v:-1};
+    s.perHabit.forEach(function(p){
+      if(p.current>bestCur.v){ bestCur={name:p.name,v:p.current}; }
+      if(p.best>bestEver.v){ bestEver={name:p.name,v:p.best}; }
+    });
+    s.trend.forEach(function(m){
+      if(m.pct>bestMonth.v) bestMonth={label:m.label,v:m.pct};
+      if(m.perfect>mostPerfect.v) mostPerfect={label:m.label,v:m.perfect};
+    });
+    [
+      { v: bestCur.v? bestCur.v+'d' : '—', l:'Longest active streak · '+bestCur.name },
+      { v: bestEver.v? bestEver.v+'d' : '—', l:'Best streak ever · '+bestEver.name },
+      { v: bestMonth.v? Math.round(bestMonth.v*100)+'%' : '—', l:'Best month · '+bestMonth.label },
+      { v: mostPerfect.v>=0? mostPerfect.v : '—', l:'Most perfect days · '+mostPerfect.label }
+    ].forEach(function(p){
+      var d=document.createElement('div'); d.className='pill';
+      d.innerHTML='<div class="v">'+p.v+'</div><div class="l">'+p.l+'</div>';
+      rec.appendChild(d);
+    });
+    rec.style.cssText='display:flex;gap:10px;flex-wrap:wrap;';
+    Array.prototype.slice.call(rec.children).forEach(function(c){ c.style.cssText='background:var(--card-2);border:1px solid var(--line);border-radius:12px;padding:8px 12px;flex:1;min-width:130px;'; });
+  }
+
+  /* ============ month-start recap popup (last month's stats) ============ */
+  function maybeShowRecap(){
+    var recap=null;
+    try{ recap=load('ht_pending_recap_v1', null); }catch(e){ return; }
+    if(!recap || !recap.month) return;
+    var flagKey='ht_recap_shown_v1_'+recap.month;
+    try{ if(localStorage.getItem(flagKey)) return; localStorage.setItem(flagKey,'1'); }catch(e){}
+
+    document.getElementById('recapTitle').textContent='📅 '+recap.label+' — recap';
+    var pills=document.getElementById('recapPills');
+    pills.innerHTML='';
+    [
+      { v: Math.round(recap.overallPct*100)+'%', l:'Completion' },
+      { v: recap.totalDone+'/'+recap.totalGoal, l:'Habits done' },
+      { v: recap.activeDays+'/'+recap.days, l:'Active days' },
+      { v: recap.perfectDays, l:'Perfect days' }
+    ].forEach(function(p){
+      var d=document.createElement('div'); d.className='pill';
+      d.innerHTML='<div class="v">'+p.v+'</div><div class="l">'+p.l+'</div>';
+      pills.appendChild(d);
+    });
+
+    var ranked=(recap.perHabit||[]).slice().filter(function(p){return p.goal>0;}).sort(function(a,b){return b.pct-a.pct;});
+    var best=ranked[0], worst=ranked[ranked.length-1];
+    var txt='';
+    if(best) txt+='Strongest habit: <b>'+best.name+'</b> ('+Math.round(best.pct*100)+'%, '+best.done+'/'+best.goal+'). ';
+    if(worst && worst.id!==best.id) txt+='Weakest: <b>'+worst.name+'</b> ('+Math.round(worst.pct*100)+'%). ';
+    if(recap.bestDow>=0) txt+='Your best day was <b>'+WD_NAMES[recap.bestDow]+'</b>. ';
+    if(recap.overallPct>=0.999) txt+='<b>🏆 PERFECT MONTH!</b>';
+    else if(recap.overallPct>=0.8) txt+='Excellent consistency — keep the momentum going.';
+    else if(recap.overallPct>=0.5) txt+='Solid month. Small improvements compound.';
+    else txt+='Fresh start — even one habit a day counts.';
+    document.getElementById('recapText').innerHTML=txt;
+
+    var bars=document.getElementById('recapBars');
+    bars.innerHTML='';
+    (recap.perHabit||[]).forEach(function(p,i){
+      bars.appendChild(barRowEl((p.icon?p.icon+' ':'')+p.name, p.goal?p.pct:0, p.done+'/'+p.goal, i*40));
+    });
+
+    document.getElementById('recapModalBackdrop').classList.add('open');
+    try{ if(recap.overallPct>=0.999) knockoutBanner(); }catch(e){}
+    celebrate();
+    vibrate([30,50,30,50,80]);
+  }
+
   function renderAll(){
     renderStorageWarning();
     var stats = renderHeader();
@@ -1520,6 +1896,7 @@
     renderMonth(stats);
     renderHistory();
     renderSettings();
+    renderStats();
   }
 
   /* ============ habit modal ============ */
@@ -1926,9 +2303,23 @@
     if(document.visibilityState === 'visible') catchUpReminders();
   });
 
+  document.getElementById('openThemeModalBtn').onclick = openThemeModal;
+  document.getElementById('themeModalCloseBtn').onclick = closeThemeModal;
+  document.getElementById('themeModalBackdrop').addEventListener('click', function(e){
+    if(e.target === this) closeThemeModal();
+  });
+
+  document.getElementById('recapCloseBtn').onclick = function(){
+    document.getElementById('recapModalBackdrop').classList.remove('open');
+  };
+  document.getElementById('recapModalBackdrop').addEventListener('click', function(e){
+    if(e.target === this) this.classList.remove('open');
+  });
+
   renderAll();
   renderCustomReminders();
   catchUpReminders();
+  setTimeout(maybeShowRecap, 600);
 
   /* pull the latest synced data once per tab, if a sync code is set */
   (function(){
