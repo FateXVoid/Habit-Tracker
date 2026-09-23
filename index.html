@@ -47,23 +47,6 @@
 @keyframes htxAppReveal{from{opacity:.25;transform:scale(1.018);filter:blur(4px)}to{opacity:1;transform:none;filter:none}}
 #htx-error{display:none;position:relative;z-index:3;max-width:620px;margin:20px auto;padding:14px 16px;border:1px solid rgba(196,115,90,.35);border-radius:14px;background:rgba(196,115,90,.08);color:#e7c7bd;font:12px/1.5 Inter,system-ui,sans-serif}
 @media (prefers-reduced-motion:reduce){#htx-intro *{animation:none!important;transition:none!important}.htx-reveal{animation:none!important}}
-
-/* === BUTTON SPACING / UI RHYTHM v3 === */
-.settings-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px;align-items:stretch}
-.settings-actions button{width:100%;min-width:0;min-height:42px;padding:11px 14px;display:flex;align-items:center;justify-content:center;line-height:1;letter-spacing:-.01em}
-.settings-actions button:nth-child(3){grid-column:1 / -1}
-.settings-card > input[type="file"]{margin-top:10px}
-.modal-actions{display:grid;grid-template-columns:1fr auto;align-items:center;gap:10px;margin-top:18px}
-.modal-actions #deleteBtn{margin-right:0;min-width:88px}
-.modal-actions #saveBtn{min-width:116px}
-.modal-actions button{min-height:42px;padding:11px 16px;display:inline-flex;align-items:center;justify-content:center;line-height:1}
-.modal-head button{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;padding:0;transition:background .2s ease,color .2s ease,transform .2s ease}
-.modal-head button:hover{background:rgba(255,255,255,.06);color:var(--ink);transform:rotate(90deg)}
-.settings-actions button,.modal-actions button{transition:transform .18s ease,background .18s ease,border-color .18s ease,box-shadow .18s ease}
-.settings-actions button:hover,.modal-actions button:hover{transform:translateY(-1px);border-color:rgba(255,255,255,.14);box-shadow:0 8px 20px rgba(0,0,0,.18)}
-.settings-actions button:active,.modal-actions button:active{transform:translateY(0) scale(.99)}
-@media(max-width:560px){.settings-actions{grid-template-columns:1fr}.settings-actions button:nth-child(3){grid-column:auto}.modal-actions{grid-template-columns:1fr 1fr}.modal-actions #deleteBtn{min-width:0}.modal-actions #saveBtn{min-width:0}}
-
 </style>
 
 <style id="htx-polish-v2">
@@ -394,6 +377,7 @@ body{margin:0!important;min-height:100vh!important;font-family:Inter,ui-sans-ser
 .modal-box{background:#191814!important;color:var(--ink)!important}.modal-box input{background:#12110e!important;color:var(--ink)!important}
 @media(max-width:680px){#htx-fallback-app{width:100%;padding:24px 18px 104px}.hero-grid{grid-template-columns:1fr!important}.completion-card,.focus-card{min-height:205px!important}.habit-grid{grid-template-columns:1fr!important}.app-head h1{font-size:30px!important}.app-nav{width:calc(100% - 28px)!important}.app-nav button{font-size:9px!important}}
 </style>
+
 <style id="ai-motion-layer">
 :root{
   --ai-gold:#d9ae53;
@@ -504,7 +488,6 @@ body::after{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;opa
   #aiCursorAura{display:none}
 }
 </style>
-
 <style id="htx-layout-v4">
 /* V4 layout normalization: keep controls inside their parents and align action groups. */
 .modal-box,
@@ -629,6 +612,12 @@ body::after{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;opa
 }
 </style>
 
+<style id="htx-license-safeguard-v5">
+  #htx-auth-gate{z-index:2147483648!important;box-sizing:border-box!important}
+  #htx-auth-gate *,#htx-auth-gate *::before,#htx-auth-gate *::after{box-sizing:border-box!important}
+  #htx-auth-gate .htx-auth-input,#htx-auth-gate .htx-auth-btn{width:100%;max-width:100%;box-sizing:border-box!important}
+  #htx-auth-gate .htx-auth-card{overflow:hidden}
+</style>
 </head>
 <body>
 <div id="htx-loading-fallback" style="display:none"></div>
@@ -661,6 +650,19 @@ body::after{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;opa
     <section id="viewHistory" class="page-view"><div class="section-head"><h2>HISTORY</h2><span>Recent days</span></div><div id="historyList" class="ui-card history-list"></div></section>
     <section id="viewCalendar" class="page-view"><div class="section-head"><h2>CALENDAR</h2><span id="calendarMonth"></span></div><div class="ui-card calendar-card"><div class="cal-head"><button id="prevMonth">‹</button><strong id="calTitle"></strong><button id="nextMonth">›</button></div><div class="week"><span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span></div><div id="calendarGrid" class="calendar-grid"></div></div></section>
     <section id="viewSettings" class="page-view"><div class="section-head"><h2>SETTINGS</h2><span>Data & preferences</span></div>
+
+    <div class="ui-card settings-card">
+      <div class="sync-title">
+        <div><b>🔐 License</b><small>Device access for this account.</small></div>
+        <span class="sync-dot ok" id="licenseDot"></span>
+      </div>
+      <div class="sync-status" id="licenseStatus">Verified</div>
+      <div class="htx-account-row">
+        <span class="htx-account-badge" id="licenseDeviceStatus">Device 1/1</span>
+        <button id="logoutDeviceBtn" type="button">Device logged out</button>
+      </div>
+    </div>
+
     <div class="ui-card settings-card sync-card">
       <div class="sync-title"><div><b>🔗 Sync code</b><small>Use the same code on your phone and PC.</small></div><span class="sync-dot" id="syncDot"></span></div>
       <div class="sync-input-row"><input id="syncCodeInput" type="text" placeholder="e.g. fox-4821" autocomplete="off" autocapitalize="off" spellcheck="false"><button id="syncGenBtn" type="button">Generate</button></div>
@@ -679,7 +681,70 @@ body::after{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;opa
 
 .note-card{padding:14px}.note-card textarea,.day-note-input{width:100%;min-height:105px;resize:vertical;border:1px solid rgba(255,255,255,.08);border-radius:14px;background:#14130f;color:var(--ink);padding:13px;outline:none;font:inherit;font-size:12px;line-height:1.5}.note-card textarea:focus,.day-note-input:focus{border-color:rgba(217,174,83,.45);box-shadow:0 0 0 3px rgba(217,174,83,.06)}.note-save{margin-top:7px;font-size:9px;color:var(--ink-faint);text-align:right}.sync-card{margin-bottom:10px}.sync-title{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:11px}.sync-title b{display:block;font-size:13px}.sync-title small{display:block;color:var(--ink-faint);font-size:10px;margin-top:3px}.sync-dot{width:8px;height:8px;border-radius:50%;background:#68635a;box-shadow:0 0 0 transparent;margin-top:4px}.sync-dot.ok{background:var(--sage);box-shadow:0 0 12px rgba(134,171,120,.65)}.sync-dot.err{background:#b5654a;box-shadow:0 0 12px rgba(181,101,74,.45)}.sync-input-row{display:grid;grid-template-columns:1fr auto;gap:8px}.sync-input-row input{margin:0!important}.sync-input-row button{border:1px solid rgba(255,255,255,.08);border-radius:11px;padding:11px;background:rgba(255,255,255,.04);color:var(--ink);cursor:pointer}.sync-status{font-size:10px;color:var(--ink-faint);margin-top:9px;line-height:1.4}.history-row{cursor:pointer;transition:.18s}.history-row:hover{background:rgba(255,255,255,.025)}.history-row .hist-main{display:flex;flex-direction:column;gap:3px}.history-row .hist-date{font-weight:800}.history-row .hist-note{font-size:9px;color:var(--ink-faint);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:190px}.day-summary{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}.day-summary .mini{padding:10px;border-radius:12px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.05)}.day-summary b{display:block;font-size:16px}.day-summary span{font-size:9px;color:var(--ink-faint)}.day-habits{display:grid;gap:6px;max-height:270px;overflow:auto}.day-habit{display:flex;align-items:center;gap:9px;padding:9px 10px;border-radius:11px;background:rgba(255,255,255,.025);font-size:11px}.day-habit .status{margin-left:auto;font-size:10px}.day-habit.done .status{color:var(--sage)}.day-habit.missed .status{color:var(--ink-faint)}.day-note-input{min-height:90px;margin-top:6px}.day-modal-box{max-height:85vh;overflow:auto}
 </style>
-<section id="htx-intro" aria-label="Habit Tracker loading screen">
+
+<style id="htx-key-auth">
+  body.htx-auth-lock{overflow:hidden!important}
+  #htx-auth-gate{
+    position:fixed;inset:0;z-index:2147483648;display:grid;place-items:center;
+    padding:24px;background:
+      radial-gradient(circle at 50% 28%,rgba(217,174,83,.12),transparent 30%),
+      radial-gradient(circle at 12% 88%,rgba(134,171,120,.08),transparent 27%),
+      #0a0908;color:#f3efe2;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  }
+  #htx-auth-gate.hidden{display:none}
+  .htx-auth-card{
+    width:min(440px,92vw);padding:28px;border-radius:24px;
+    background:linear-gradient(160deg,rgba(31,30,25,.98),rgba(18,17,14,.98));
+    border:1px solid rgba(255,255,255,.09);
+    box-shadow:0 28px 90px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.04);
+  }
+  .htx-auth-mark{
+    width:54px;height:54px;border-radius:16px;display:grid;place-items:center;margin-bottom:18px;
+    background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.015));
+    border:1px solid rgba(255,255,255,.1);color:#f0d186;font-weight:900;font-size:22px;
+    box-shadow:0 0 34px rgba(217,174,83,.12);
+  }
+  .htx-auth-eyebrow{font-size:10px;letter-spacing:.16em;color:#777164;font-weight:800}
+  .htx-auth-title{font-size:30px;letter-spacing:-.045em;font-weight:850;margin-top:5px}
+  .htx-auth-sub{font-size:12px;line-height:1.55;color:#777164;margin-top:7px}
+  .htx-auth-form{margin-top:22px}
+  .htx-auth-form label{display:block;font-size:10px;color:#8e8879;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+  .htx-auth-input{
+    width:100%;box-sizing:border-box;margin-top:8px;padding:13px 14px;border-radius:13px;
+    border:1px solid rgba(255,255,255,.08);background:#12110e;color:#f3efe2;outline:none;
+    font:inherit;font-size:13px;letter-spacing:.04em;
+  }
+  .htx-auth-input:focus{border-color:rgba(217,174,83,.45);box-shadow:0 0 0 3px rgba(217,174,83,.07)}
+  .htx-auth-btn{
+    width:100%;margin-top:10px;padding:13px;border:1px solid rgba(217,174,83,.22);border-radius:13px;
+    background:rgba(217,174,83,.14);color:#f0d186;font:inherit;font-weight:850;cursor:pointer;
+  }
+  .htx-auth-btn:disabled{opacity:.55;cursor:wait}
+  .htx-auth-msg{min-height:18px;margin-top:10px;font-size:10px;color:#6f6959;line-height:1.45}
+  .htx-auth-msg.err{color:#d8a096}
+  .htx-auth-msg.ok{color:#a9c79e}
+  #htx-intro.htx-preauth{display:none}
+  .htx-account-row{margin-top:10px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .htx-account-badge{font-size:10px;color:#777164}
+  #logoutDeviceBtn{border:1px solid rgba(181,101,74,.25)!important;color:#e8b0a7!important}
+  @media(max-width:520px){.htx-auth-card{padding:22px}.htx-auth-title{font-size:26px}}
+</style>
+<div id="htx-auth-gate" aria-label="Key login">
+  <div class="htx-auth-card">
+    <div class="htx-auth-mark">◇</div>
+    <div class="htx-auth-eyebrow">LICENSE ACCESS</div>
+    <div class="htx-auth-title">Enter your Key</div>
+    <div class="htx-auth-sub">Your license is linked to this device. Once verified, the app will continue to the loading screen.</div>
+    <form id="htx-auth-form" class="htx-auth-form">
+      <label for="htx-key-input">Access Key</label>
+      <input id="htx-key-input" class="htx-auth-input" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="XXXX-XXXX-XXXX-XXXX" required>
+      <button id="htx-auth-btn" class="htx-auth-btn" type="submit">VERIFY KEY</button>
+      <div id="htx-auth-msg" class="htx-auth-msg"></div>
+    </form>
+  </div>
+</div>
+
+<section id="htx-intro" class="htx-preauth" aria-label="Habit Tracker loading screen">
   <div id="htx-grid"></div><div id="htx-scanlines"></div>
   <span class="htx-orb a"></span><span class="htx-orb b"></span><span class="htx-orb c"></span>
   <div class="htx-core">
@@ -700,25 +765,35 @@ body::after{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;opa
 <script>
 (() => {
   const intro=document.getElementById('htx-intro'), fill=document.getElementById('htx-fill'), percent=document.getElementById('htx-percent'), status=document.getElementById('htx-status-text'), prompt=document.getElementById('htx-prompt'), flash=document.getElementById('htx-flash'), app=document.getElementById('htx-fallback-app');
-  let ready=false, entering=false, p=0;
+  const authGate=document.getElementById('htx-auth-gate'), authForm=document.getElementById('htx-auth-form'), authInput=document.getElementById('htx-key-input'), authBtn=document.getElementById('htx-auth-btn'), authMsg=document.getElementById('htx-auth-msg');
+  const DEVICE_KEY='habit-tracker-device-id-v1', quotes=['Consistency beats intensity when nobody is watching.','Small wins become big changes.','Show up today. Let tomorrow handle itself.','Progress is a system, not a mood.'];
+  const defaults={habits:[{id:1,name:'Wake up',detail:'06:00–07:00',emoji:'🌅',done:false},{id:2,name:'Cold shower',detail:'',emoji:'🚿',done:false},{id:3,name:'Read 5 pages',detail:'',emoji:'📖',done:false},{id:4,name:'Work out',detail:'',emoji:'💪',done:false},{id:5,name:'Boxing',detail:'',emoji:'🥊',done:false},{id:6,name:'Work',detail:'',emoji:'💼',done:false},{id:7,name:'Learn a skill',detail:'',emoji:'🎯',done:false},{id:8,name:'Sleep',detail:'22:00–23:00',emoji:'🌙',done:false}],history:{},records:{},quote:quotes[0]};
+  const dataKeyPrefix='habit-tracker-v6:';
+  let dataKey='', db=null, editId=null, calDate=new Date(), currentAuth=null, ready=false, entering=false, p=0, loadingStarted=false;
+  const deviceId=()=>{let id=localStorage.getItem(DEVICE_KEY);if(!id){id=(crypto.randomUUID?crypto.randomUUID():'dev-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2));localStorage.setItem(DEVICE_KEY,id)}return id};
+  const setAuthMsg=(msg,type='')=>{authMsg.textContent=msg;authMsg.className='htx-auth-msg'+(type?' '+type:'')};
+  const initDb=()=>{dataKey=dataKeyPrefix+currentAuth.licenseId;db=JSON.parse(localStorage.getItem(dataKey)||'null')||JSON.parse(JSON.stringify(defaults));db.records=db.records||{}};
+  const api=async(url,opts={})=>{const r=await fetch(url,{credentials:'include',headers:{'Content-Type':'application/json',...(opts.headers||{})},...opts});let j=null;try{j=await r.json()}catch{};if(!r.ok)throw new Error(j?.error||'Request failed');return j};
+  const showAppLogin=()=>{document.body.classList.add('htx-auth-lock');authGate.classList.remove('hidden');intro.classList.add('htx-preauth');app.classList.remove('show');setTimeout(()=>authInput.focus(),30)};
+  const showLoading=()=>{document.body.classList.add('htx-auth-lock');authGate.classList.add('hidden');intro.classList.remove('htx-preauth');intro.style.display='grid';startLoading()};
   const states=[[0,'Initializing interface'],[18,'Loading routines'],[38,'Syncing daily data'],[60,'Calibrating focus'],[78,'Preparing your space'],[91,'Verifying local storage'],[100,'System ready']];
   const label=x=>states.reduce((a,v)=>x>=v[0]?v[1]:a,states[0][1]);
-  const dataKey='habit-tracker-v5';
-  const quotes=['Consistency beats intensity when nobody is watching.','Small wins become big changes.','Show up today. Let tomorrow handle itself.','Progress is a system, not a mood.'];
-  let db=JSON.parse(localStorage.getItem(dataKey)||'null')||{habits:[{id:1,name:'Wake up',detail:'06:00–07:00',emoji:'🌅',done:false},{id:2,name:'Cold shower',detail:'',emoji:'🚿',done:false},{id:3,name:'Read 5 pages',detail:'',emoji:'📖',done:false},{id:4,name:'Work out',detail:'',emoji:'💪',done:false},{id:5,name:'Boxing',detail:'',emoji:'🥊',done:false},{id:6,name:'Work',detail:'',emoji:'💼',done:false},{id:7,name:'Learn a skill',detail:'',emoji:'🎯',done:false},{id:8,name:'Sleep',detail:'22:00–23:00',emoji:'🌙',done:false}],history:{},records:{},quote:quotes[0]};
-  db.records=db.records||{};
-  let editId=null, calDate=new Date();
   const todayKey=()=>{const d=new Date();return d.toISOString().slice(0,10)};
+  function renderLicense(s){const e=document.getElementById('licenseDeviceStatus');const role=s.role==='developer'?'Developer key · Unlimited devices':`Device ${s.deviceCount||1}/${s.maxDevices||1}`;if(e)e.textContent=role;const st=document.getElementById('licenseStatus');if(st)st.textContent=`Key ${s.keyMasked||''} · ${s.role==='developer'?'Developer':'User'}`}
+  document.getElementById('logoutDeviceBtn').onclick=async()=>{if(!confirm('Log out this device? You will need the key again on this device.'))return;try{await api('/api/auth?action=logout',{method:'POST',body:JSON.stringify({deviceId:deviceId()})});location.reload()}catch(e){alert(e.message||'Could not log out device.')}};
   const save=()=>{localStorage.setItem(dataKey,JSON.stringify(db));localStorage.setItem('habit-tracker-sync-updated-v1',String(Date.now()));};
   const ensureHistory=()=>{const k=todayKey();const done=db.habits.filter(h=>h.done).length;db.history[k]=done;db.records[k]=db.records[k]||{};db.records[k].habits=db.habits.map(h=>({id:h.id,name:h.name,emoji:h.emoji,done:!!h.done}));db.records[k].note=db.records[k].note??'';};
   function saveDayRecord(k){const key=k||todayKey();db.records=db.records||{};db.records[key]=db.records[key]||{};db.records[key].habits=db.habits.map(h=>({id:h.id,name:h.name,emoji:h.emoji,done:!!h.done}));db.records[key].note=(key===todayKey()?document.getElementById('noteBox')?.value:(db.records[key].note||''));db.history[key]=db.records[key].habits.filter(h=>h.done).length;save()}
   function getDayRecord(k){return (db.records&&db.records[k])||{habits:[],note:''}}
 
+  function startLoading(){if(loadingStarted)return;loadingStarted=true;ready=false;entering=false;p=0;fill.style.width='0%';percent.textContent='0%';status.textContent='Initializing interface';prompt.classList.remove('ready');const timer=setInterval(()=>{p=Math.min(100,p+Math.max(1,Math.round((100-p)*.075)));if(p>98)p=100;fill.style.width=p+'%';percent.textContent=p+'%';status.textContent=label(p);if(p>=100){clearInterval(timer);setTimeout(finish,120)}},55);setTimeout(finish,4200)}
   function finish(){if(ready)return;ready=true;p=100;fill.style.width='100%';percent.textContent='100%';status.textContent='System ready';prompt.classList.add('ready')}
-  const timer=setInterval(()=>{p=Math.min(100,p+Math.max(1,Math.round((100-p)*.075)));if(p>98)p=100;fill.style.width=p+'%';percent.textContent=p+'%';status.textContent=label(p);if(p>=100){clearInterval(timer);setTimeout(finish,120)}},55);setTimeout(finish,4200);
-  function enter(){if(!ready||entering)return;entering=true;document.removeEventListener('keydown',key);intro.removeEventListener('pointerdown',enter);flash.classList.add('fire');prompt.classList.remove('ready');app.classList.add('show');document.body.style.overflow='auto';intro.classList.add('htx-leave');setTimeout(()=>intro.remove(),850);render()}
-  function key(e){if(e.code==='Enter'||e.code==='Space'||e.key.length===1){e.preventDefault();enter()}}
-  document.addEventListener('keydown',key);intro.addEventListener('pointerdown',enter);document.body.style.overflow='hidden';
+  function enter(){if(!ready||entering)return;entering=true;document.removeEventListener('keydown',key);intro.removeEventListener('pointerdown',enter);flash.classList.add('fire');prompt.classList.remove('ready');app.classList.add('show');document.body.classList.remove('htx-auth-lock');document.body.style.overflow='auto';intro.classList.add('htx-leave');setTimeout(()=>intro.remove(),850);render()}
+  function key(e){if(e.code==='Enter'||e.code==='Space'){e.preventDefault();enter()}}
+  async function bootstrapAuth(){try{const s=await api('/api/auth?action=session',{method:'GET'});if(s.authenticated){currentAuth=s;initDb();renderLicense(s);showLoading();return}showAppLogin()}catch(e){showAppLogin();setAuthMsg('Could not verify access. Please try again.','err')}}
+  authForm.addEventListener('submit',async e=>{e.preventDefault();const keyValue=authInput.value.trim();if(!keyValue)return;authBtn.disabled=true;setAuthMsg('Verifying key…');try{const s=await api('/api/auth?action=login',{method:'POST',body:JSON.stringify({key:keyValue,deviceId:deviceId()})});currentAuth=s;initDb();authInput.value='';setAuthMsg('Access granted.','ok');renderLicense(s);setTimeout(showLoading,180)}catch(err){setAuthMsg(err.message||'Invalid key.','err')}finally{authBtn.disabled=false}});
+  document.addEventListener('keydown',key);intro.addEventListener('pointerdown',enter);
+  document.body.classList.add('htx-auth-lock');bootstrapAuth();
 
   function render(){ensureHistory();save();document.getElementById('liveDate').textContent=new Date().toLocaleDateString(undefined,{weekday:'long',month:'short',day:'numeric'});document.getElementById('quote').textContent=db.quote||quotes[0];document.getElementById('noteBox').value=getDayRecord(todayKey()).note||'';const total=db.habits.length,done=db.habits.filter(h=>h.done).length,pct=total?Math.round(done/total*100):0;document.getElementById('score').textContent=pct+'%';document.getElementById('ringText').textContent=pct+'%';document.getElementById('count').textContent=done+' / '+total+' habits';document.getElementById('openCount').textContent=total-done;document.getElementById('focusOpen').textContent=total-done;document.getElementById('sectionCount').textContent=done+' of '+total+' complete';document.getElementById('ring').style.background=`conic-gradient(var(--accent) ${pct*3.6}deg,#292822 0deg)`;
     const list=document.getElementById('habitList');list.innerHTML='';db.habits.forEach(h=>{const el=document.createElement('article');el.className='ui-card habit'+(h.done?' done':'');el.innerHTML=`<div class="emoji">${h.emoji}</div><div class="habit-main"><b>${esc(h.name)}</b><small>${esc(h.detail)}</small></div><div class="toggle"><i></i></div><span class="edit-dot">•••</span>`;el.onclick=()=>toggle(h.id);el.ondblclick=e=>{e.preventDefault();openModal(h.id)};list.appendChild(el)});
@@ -739,11 +814,12 @@ body::after{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;opa
   document.getElementById('prevMonth').onclick=()=>{calDate.setMonth(calDate.getMonth()-1);renderCalendar()};document.getElementById('nextMonth').onclick=()=>{calDate.setMonth(calDate.getMonth()+1);renderCalendar()};
   document.getElementById('quoteInput').value=db.quote||quotes[0];document.getElementById('syncCodeInput').value=getSyncCode();if(getSyncCode())syncStatus('Connected · '+getSyncCode(),'ok');document.getElementById('quoteInput').onchange=e=>{db.quote=e.target.value||quotes[0];render()};
   let noteTimer;document.getElementById('noteBox').addEventListener('input',e=>{clearTimeout(noteTimer);document.getElementById('noteSaveStatus').textContent='Saving…';noteTimer=setTimeout(()=>{db.records=db.records||{};db.records[todayKey()]=db.records[todayKey()]||{};db.records[todayKey()].note=e.target.value;db.history[todayKey()]=db.habits.filter(h=>h.done).length;save();document.getElementById('noteSaveStatus').textContent='Saved automatically';renderHistory();renderCalendar()},350)});
-    const SUPABASE_URL='https://avzshytxewxocwrcyxli.supabase.co',SUPABASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhbGciOiJIUzI1NiIsInJlZiI6ImF2enNoeXR4ZXd4b2N3cmN5eGxpIiwiaWF0IjoxNzg5NTQ2NzE4LCJleHAiOjIxMDUxMjI3MTh9.sSd0fM0B2426PE4MBInPpM4flYisTMXfdLUhbCPyBOQ';const SYNC_KEY='habit-tracker-sync-code-v1',SYNC_META='habit-tracker-sync-updated-v1';const getSyncCode=()=>localStorage.getItem(SYNC_KEY)||'';const syncStatus=(t,c)=>{const e=document.getElementById('syncStatus'),d=document.getElementById('syncDot');if(e)e.textContent=t;if(d)d.className='sync-dot'+(c?' '+c:'')};const syncPayload=()=>({app:'habit-tracker-v6',db,updatedAt:Number(localStorage.getItem(SYNC_META)||Date.now())});const touchSync=()=>localStorage.setItem(SYNC_META,String(Date.now()));async function pushSync(){const code=getSyncCode().trim();if(!code)return false;syncStatus('Saving to sync…');try{touchSync();const data=syncPayload();const res=await fetch(SUPABASE_URL+'/rest/v1/habit_tracker_sync',{method:'POST',headers:{apikey:SUPABASE_ANON_KEY,Authorization:'Bearer '+SUPABASE_ANON_KEY,'Content-Type':'application/json',Prefer:'resolution=merge-duplicates,return=minimal'},body:JSON.stringify({sync_code:code,data,updated_at:new Date(data.updatedAt).toISOString()})});if(!res.ok)throw new Error();syncStatus('Synced just now · '+code,'ok');return true}catch(e){syncStatus('Could not reach sync server — data remains local','err');return false}}async function pullSync(){const code=getSyncCode().trim();if(!code)return {applied:false,hadData:false};syncStatus('Checking for updates…');try{const res=await fetch(SUPABASE_URL+'/rest/v1/habit_tracker_sync?sync_code=eq.'+encodeURIComponent(code)+'&select=data,updated_at');if(!res.ok)throw new Error();const rows=await res.json();if(!rows[0]?.data){syncStatus('No shared data under this code yet.');return {applied:false,hadData:false}}const remote=rows[0],remoteAt=new Date(remote.updated_at).getTime()||remote.data.updatedAt||0,localAt=Number(localStorage.getItem(SYNC_META)||0);if(remoteAt>localAt&&remote.data.db){db=remote.data.db;localStorage.setItem(dataKey,JSON.stringify(db));localStorage.setItem(SYNC_META,String(remoteAt));syncStatus('Latest data pulled','ok');return {applied:true,hadData:true}}syncStatus('Already up to date','ok');return {applied:false,hadData:true}}catch(e){syncStatus('Could not reach sync server','err');return {applied:false,hadData:false}}}const genSync=()=>{const w=['fox','maple','coral','ember','lotus','onyx','plum','sable','tide','wren','birch','jade'];return w[Math.floor(Math.random()*w.length)]+'-'+Math.floor(1000+Math.random()*9000)};document.getElementById('syncGenBtn').onclick=()=>document.getElementById('syncCodeInput').value=genSync();document.getElementById('syncSaveBtn').onclick=async()=>{const code=document.getElementById('syncCodeInput').value.trim();if(!code){syncStatus('Enter or generate a code first','err');return}localStorage.setItem(SYNC_KEY,code);const r=await pullSync();if(r.applied){render();alert('Latest synced data loaded.')}else{await pushSync();renderSettings()}};document.getElementById('syncPullBtn').onclick=async()=>{const r=await pullSync();if(r.applied){render();alert('Latest data loaded.')}};document.getElementById('syncOffBtn').onclick=()=>{localStorage.removeItem(SYNC_KEY);syncStatus('Not connected — local only.');document.getElementById('syncDot').className='sync-dot'};
+    const SUPABASE_URL='https://avzshytxewxocwrcyxli.supabase.co',SUPABASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhbGciOiJIUzI1NiIsInJlZiI6ImF2enNoeXR4ZXd4b2N3cmN5eGxpIiwiaWF0IjoxNzg5NTQ2NzE4LCJleHAiOjIxMDUxMjI3MTh9.sSd0fM0B2426PE4MBInPpM4flYisTMXfdLUhbCPyBOQ';const SYNC_KEY=()=>`habit-tracker-sync-code-v1:${currentAuth?.licenseId||'none'}`,SYNC_META=()=>`habit-tracker-sync-updated-v1:${currentAuth?.licenseId||'none'}`;const getSyncCode=()=>localStorage.getItem(SYNC_KEY())||'';const syncStatus=(t,c)=>{const e=document.getElementById('syncStatus'),d=document.getElementById('syncDot');if(e)e.textContent=t;if(d)d.className='sync-dot'+(c?' '+c:'')};const syncPayload=()=>({app:'habit-tracker-v6',db,updatedAt:Number(localStorage.getItem(SYNC_META())||Date.now())});const touchSync=()=>localStorage.setItem(SYNC_META(),String(Date.now()));async function pushSync(){const code=getSyncCode().trim();if(!code)return false;syncStatus('Saving to sync…');try{touchSync();const data=syncPayload();const res=await fetch(SUPABASE_URL+'/rest/v1/habit_tracker_sync',{method:'POST',headers:{apikey:SUPABASE_ANON_KEY,Authorization:'Bearer '+SUPABASE_ANON_KEY,'Content-Type':'application/json',Prefer:'resolution=merge-duplicates,return=minimal'},body:JSON.stringify({sync_code:code,data,updated_at:new Date(data.updatedAt).toISOString()})});if(!res.ok)throw new Error();syncStatus('Synced just now · '+code,'ok');return true}catch(e){syncStatus('Could not reach sync server — data remains local','err');return false}}async function pullSync(){const code=getSyncCode().trim();if(!code)return {applied:false,hadData:false};syncStatus('Checking for updates…');try{const res=await fetch(SUPABASE_URL+'/rest/v1/habit_tracker_sync?sync_code=eq.'+encodeURIComponent(code)+'&select=data,updated_at');if(!res.ok)throw new Error();const rows=await res.json();if(!rows[0]?.data){syncStatus('No shared data under this code yet.');return {applied:false,hadData:false}}const remote=rows[0],remoteAt=new Date(remote.updated_at).getTime()||remote.data.updatedAt||0,localAt=Number(localStorage.getItem(SYNC_META())||0);if(remoteAt>localAt&&remote.data.db){db=remote.data.db;localStorage.setItem(dataKey,JSON.stringify(db));localStorage.setItem(SYNC_META(),String(remoteAt));syncStatus('Latest data pulled','ok');return {applied:true,hadData:true}}syncStatus('Already up to date','ok');return {applied:false,hadData:true}}catch(e){syncStatus('Could not reach sync server','err');return {applied:false,hadData:false}}}const genSync=()=>{const w=['fox','maple','coral','ember','lotus','onyx','plum','sable','tide','wren','birch','jade'];return w[Math.floor(Math.random()*w.length)]+'-'+Math.floor(1000+Math.random()*9000)};document.getElementById('syncGenBtn').onclick=()=>document.getElementById('syncCodeInput').value=genSync();document.getElementById('syncSaveBtn').onclick=async()=>{const code=document.getElementById('syncCodeInput').value.trim();if(!code){syncStatus('Enter or generate a code first','err');return}localStorage.setItem(SYNC_KEY(),code);const r=await pullSync();if(r.applied){render();alert('Latest synced data loaded.')}else{await pushSync();render()}};document.getElementById('syncPullBtn').onclick=async()=>{const r=await pullSync();if(r.applied){render();alert('Latest data loaded.')}};document.getElementById('syncOffBtn').onclick=()=>{localStorage.removeItem(SYNC_KEY());syncStatus('Not connected — local only.');document.getElementById('syncDot').className='sync-dot'};
   window.addEventListener('pagehide',()=>{if(getSyncCode())pushSync()});
 document.getElementById('exportBtn').onclick=()=>{const blob=new Blob([JSON.stringify(db,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='habit-tracker-backup.json';a.click();URL.revokeObjectURL(a.href)};document.getElementById('importBtn').onclick=()=>document.getElementById('importFile').click();document.getElementById('importFile').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{db=JSON.parse(r.result);db.records=db.records||{};localStorage.setItem(dataKey,JSON.stringify(db));touchSync();render();alert('Data imported.')}catch{alert('Invalid backup file.')}};r.readAsText(f)};document.getElementById('resetBtn').onclick=()=>{if(confirm('Reset all habit data?')){localStorage.removeItem(dataKey);location.reload()}};
 })();
 </script>
+
 <script id="ai-motion-runtime">
 (()=>{
   const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
