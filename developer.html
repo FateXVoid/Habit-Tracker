@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Developer Console</title>
+<style>
+:root{--bg:#0a0908;--card:#191814;--card2:#12110e;--ink:#f3efe2;--muted:#777164;--gold:#d9ae53;--gold2:#f0d186;--sage:#86ab78;--danger:#d9897c;--line:rgba(255,255,255,.08)}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(900px 500px at 0% 0%,rgba(217,174,83,.12),transparent 58%),radial-gradient(800px 500px at 100% 20%,rgba(134,171,120,.09),transparent 58%),var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+button,input{font:inherit}.wrap{width:min(1080px,calc(100% - 28px));margin:0 auto;padding:28px 0 70px}.eyebrow{font-size:10px;letter-spacing:.17em;color:var(--muted);font-weight:800}.title{font-size:34px;letter-spacing:-.045em;font-weight:900;margin-top:4px}.sub{font-size:12px;color:var(--muted);margin-top:6px}.top{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:22px}.logout{border:1px solid var(--line);background:rgba(255,255,255,.035);color:var(--ink);border-radius:11px;padding:10px 13px;cursor:pointer}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.card{border:1px solid var(--line);border-radius:20px;background:linear-gradient(160deg,rgba(31,30,25,.98),rgba(18,17,14,.98));padding:18px;box-shadow:0 20px 50px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.03)}.card h2{font-size:12px;margin:0;color:#8e8879;letter-spacing:.08em}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}.stat{padding:12px;border-radius:13px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.045)}.stat b{font-size:23px;display:block}.stat span{font-size:9px;color:var(--muted)}.generate{display:grid;grid-template-columns:1fr auto;gap:8px;margin-top:14px}.generate select,.generate input,.login input{background:#12110e;color:var(--ink);border:1px solid var(--line);border-radius:11px;padding:12px;outline:none}.primary{border:1px solid rgba(217,174,83,.24);background:rgba(217,174,83,.14);color:var(--gold2);border-radius:11px;padding:12px 15px;cursor:pointer;font-weight:800}.tabs{display:flex;gap:7px;margin:20px 0 10px}.tab{border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--muted);border-radius:10px;padding:9px 12px;cursor:pointer}.tab.active{background:rgba(217,174,83,.12);color:var(--gold2);border-color:rgba(217,174,83,.18)}.key-list{display:grid;gap:8px}.key-row{display:grid;grid-template-columns:1.15fr .65fr .75fr 1.1fr auto;gap:10px;align-items:center;padding:12px 13px;border-radius:14px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.05)}.key-main{font-weight:850;font-size:12px;word-break:break-all}.meta{font-size:10px;color:var(--muted)}.pill{display:inline-flex;align-items:center;justify-content:center;padding:5px 8px;border-radius:999px;font-size:9px;font-weight:850}.pill.active{color:#b9d6af;background:rgba(134,171,120,.12)}.pill.idle{color:#a59e8d;background:rgba(255,255,255,.05)}.act{display:flex;gap:6px;justify-content:flex-end}.ghost,.danger{border:1px solid var(--line);background:rgba(255,255,255,.035);color:var(--ink);border-radius:9px;padding:8px 10px;cursor:pointer;font-size:10px}.danger{color:var(--danger);border-color:rgba(217,137,124,.2)}.login{min-height:100vh;display:grid;place-items:center;padding:20px}.login .box{width:min(420px,92vw);padding:28px;border:1px solid var(--line);border-radius:22px;background:#191814;box-shadow:0 30px 100px rgba(0,0,0,.55)}.login h1{margin:5px 0 7px;font-size:30px;letter-spacing:-.045em}.login p{margin:0;color:var(--muted);font-size:12px;line-height:1.5}.login form{margin-top:18px}.login label{display:block;font-size:10px;color:#8e8879;font-weight:800;letter-spacing:.08em;text-transform:uppercase}.login input{width:100%;margin-top:7px}.login button{width:100%;margin-top:10px}.msg{min-height:16px;margin-top:9px;font-size:10px;color:var(--muted)}.msg.err{color:#d8a096}.empty{padding:20px;text-align:center;color:var(--muted);font-size:11px;border:1px dashed var(--line);border-radius:14px}
+@media(max-width:820px){.grid{grid-template-columns:1fr}.key-row{grid-template-columns:1fr 1fr}.key-row .act{grid-column:1/-1;justify-content:flex-start}}
+@media(max-width:560px){.top{align-items:flex-start}.title{font-size:28px}.stats{grid-template-columns:1fr 1fr}.key-row{grid-template-columns:1fr}.act{grid-column:auto!important}}
+</style>
+</head>
+<body>
+<div id="loginPage" class="login">
+  <div class="box">
+    <div class="eyebrow">PRIVATE CONSOLE</div><h1>Developer Access</h1>
+    <p>This console is intentionally not linked from the public app.</p>
+    <form id="adminLoginForm"><label>Developer password<input id="adminPassword" type="password" autocomplete="current-password" required></label><button class="primary" type="submit">ENTER CONSOLE</button><div id="loginMsg" class="msg"></div></form>
+  </div>
+</div>
+<div id="consolePage" style="display:none">
+  <div class="wrap">
+    <div class="top"><div><div class="eyebrow">FATEX VOID · DEVELOPER</div><div class="title">Key Management</div><div class="sub">Generate licenses, inspect active devices, and release device bindings.</div></div><button id="adminLogout" class="logout">Logout</button></div>
+    <div class="grid">
+      <section class="card"><h2>OVERVIEW</h2><div class="stats"><div class="stat"><b id="totalCount">0</b><span>Total keys</span></div><div class="stat"><b id="activeCount">0</b><span>Active</span></div><div class="stat"><b id="inactiveCount">0</b><span>Inactive</span></div></div></section>
+      <section class="card"><h2>GENERATE KEY</h2><div class="generate"><select id="roleSelect"><option value="user">User key · 1 device</option><option value="developer">Developer key · unlimited devices</option></select><button id="generateBtn" class="primary">Generate</button></div><div id="generatedMsg" class="msg"></div></section>
+    </div>
+    <div class="tabs"><button class="tab active" data-tab="inactive">Inactive keys</button><button class="tab" data-tab="active">Active keys</button><button class="tab" data-tab="all">All keys</button></div>
+    <section class="card"><h2 id="listTitle">INACTIVE KEYS</h2><div id="keyList" class="key-list" style="margin-top:12px"></div></section>
+  </div>
+</div>
+<script>
+(()=>{const loginPage=document.getElementById('loginPage'),consolePage=document.getElementById('consolePage'),form=document.getElementById('adminLoginForm'),msg=document.getElementById('loginMsg'),list=document.getElementById('keyList');let tab='inactive';
+async function api(url,opts={}){const r=await fetch(url,{credentials:'include',headers:{'Content-Type':'application/json',...(opts.headers||{})},...opts});let j=null;try{j=await r.json()}catch{};if(!r.ok)throw new Error(j?.error||'Request failed');return j}
+function showConsole(){loginPage.style.display='none';consolePage.style.display='block';load()}
+async function bootstrap(){try{await api('/api/admin?action=session',{method:'GET'});showConsole()}catch{}}
+form.addEventListener('submit',async e=>{e.preventDefault();msg.textContent='Checking…';try{await api('/api/admin?action=login',{method:'POST',body:JSON.stringify({password:document.getElementById('adminPassword').value})});showConsole()}catch(err){msg.textContent=err.message||'Access denied';msg.className='msg err'}});
+document.getElementById('adminLogout').onclick=async()=>{await api('/api/admin?action=logout',{method:'POST'});location.reload()};
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));b.classList.add('active');tab=b.dataset.tab;load()});
+document.getElementById('generateBtn').onclick=async()=>{const role=document.getElementById('roleSelect').value;const x=document.getElementById('generatedMsg');x.textContent='Generating…';try{const r=await api('/api/admin?action=generate',{method:'POST',body:JSON.stringify({role})});x.textContent='Created: '+r.key;load()}catch(e){x.textContent=e.message||'Could not generate key'}};
+function esc(v){return String(v).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+async function load(){try{const r=await api('/api/admin?action=list',{method:'GET'});document.getElementById('totalCount').textContent=r.stats.total;document.getElementById('activeCount').textContent=r.stats.active;document.getElementById('inactiveCount').textContent=r.stats.inactive;document.getElementById('listTitle').textContent=tab.toUpperCase()+' KEYS';const rows=r.keys.filter(k=>tab==='all'||(tab==='active'?k.active:!k.active));list.innerHTML=rows.length?rows.map(k=>{const unlimited=k.role==='developer';const deviceLabel=unlimited?`${k.deviceCount} devices`:`${k.deviceCount}/1`;const action=k.active?`<button class="ghost" data-logout="${k.id}">${unlimited?'Log out all devices':'Device logged out'}</button>`:'';return `<div class="key-row"><div><div class="key-main">${esc(k.key)}</div><div class="meta">${esc(k.role)} · created ${esc(k.createdAt)}</div></div><div><span class="pill ${k.active?'active':'idle'}">${k.active?'ACTIVE':'INACTIVE'}</span></div><div class="meta">${deviceLabel}</div><div class="meta">${k.lastLogin?('Last login · '+esc(k.lastLogin)):'Never used'}</div><div class="act">${action}<button class="danger" data-revoke="${k.id}">Revoke</button></div></div>`}).join(''):'<div class="empty">No keys in this section.</div>';
+list.querySelectorAll('[data-logout]').forEach(b=>b.onclick=async()=>{if(!confirm('Release device access for this key?'))return;await api('/api/admin?action=device-logout',{method:'POST',body:JSON.stringify({keyId:b.dataset.logout})});load()});
+list.querySelectorAll('[data-revoke]').forEach(b=>b.onclick=async()=>{if(!confirm('Revoke this key permanently?'))return;await api('/api/admin?action=revoke',{method:'POST',body:JSON.stringify({keyId:b.dataset.revoke})});load()});
+}catch(e){list.innerHTML='<div class="empty">'+esc(e.message||'Could not load keys.')+'</div>'}}
+bootstrap()})();
+</script>
+</body>
+</html>

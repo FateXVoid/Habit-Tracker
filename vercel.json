@@ -1,0 +1,11 @@
+{
+  "headers": [
+    {
+      "source": "/void-console-7c2a.html",
+      "headers": [
+        {"key":"X-Robots-Tag","value":"noindex, nofollow, noarchive"},
+        {"key":"Cache-Control","value":"no-store"}
+      ]
+    }
+  ]
+}
