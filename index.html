@@ -618,7 +618,29 @@ body::after{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;opa
   #htx-auth-gate .htx-auth-input,#htx-auth-gate .htx-auth-btn{width:100%;max-width:100%;box-sizing:border-box!important}
   #htx-auth-gate .htx-auth-card{overflow:hidden}
 </style>
-</head>
+\n<style id="htx-real-life-calendar-v1">
+/* Clear date + event context */
+#htx-day-context{display:flex;justify-content:space-between;align-items:center;gap:14px;margin:-4px 0 16px;padding:12px 14px;border:1px solid rgba(255,255,255,.065);border-radius:16px;background:linear-gradient(165deg,rgba(31,30,25,.76),rgba(20,19,17,.82));box-shadow:0 14px 32px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.035);backdrop-filter:blur(10px)}
+.htx-day-context-main{display:grid;gap:2px;min-width:0}.htx-context-kicker{font-size:9px;letter-spacing:.16em;color:var(--accent);font-weight:850}.htx-day-context-main strong{font-size:13px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.htx-day-context-main span:last-child{font-size:9.5px;color:var(--ink-faint)}
+.htx-event-chips{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:6px}.htx-event-chip{padding:6px 8px;border-radius:999px;border:1px solid rgba(255,255,255,.07);font-size:9px;color:var(--ink-dim);background:rgba(255,255,255,.025);white-space:nowrap}.htx-event-chip.holiday{color:#f0d186;border-color:rgba(240,209,134,.16);background:rgba(217,174,83,.07)}.htx-event-chip.religious{color:#c5d9bb;border-color:rgba(134,171,120,.16);background:rgba(134,171,120,.05)}
+.htx-day-intel{margin:0 0 2px;padding:15px 16px;overflow:hidden;position:relative}.htx-day-intel:after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 92% 8%,rgba(118,215,255,.07),transparent 32%),radial-gradient(circle at 8% 100%,rgba(217,174,83,.055),transparent 32%)}.htx-intel-head{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:10px}.htx-intel-head>div{display:grid;gap:2px}.htx-intel-kicker{font-size:9px;letter-spacing:.14em;color:var(--accent);font-weight:850}.htx-intel-head strong{font-size:13px}.htx-intel-count{font-size:9.5px;color:var(--ink-faint)}
+.htx-important-list{position:relative;z-index:1;display:grid;gap:7px;margin-top:10px}.htx-important-item{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:9px;padding:9px 10px;border-radius:12px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.045)}.htx-important-item .event-icon{width:24px;height:24px;display:grid;place-items:center;border-radius:8px;background:rgba(255,255,255,.035);font-size:12px}.htx-important-item .event-copy{min-width:0}.htx-important-item strong{display:block;font-size:10.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.htx-important-item small{display:block;margin-top:2px;font-size:8.5px;color:var(--ink-faint);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.htx-important-item .event-tag{font-size:8px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-faint)}.htx-important-item.holiday{border-color:rgba(240,209,134,.16)}.htx-important-item.holiday .event-tag{color:#f0d186}.htx-important-item.religious{border-color:rgba(134,171,120,.16)}.htx-important-item.religious .event-tag{color:#a9c99b}.htx-intel-source{position:relative;z-index:1;margin-top:9px;color:var(--ink-faint);font-size:8.5px}
+
+/* Daily quest */
+.daily-quest-card{position:relative;overflow:hidden;padding:16px;margin-top:14px;border-color:rgba(217,174,83,.16);background:linear-gradient(165deg,rgba(35,32,23,.98),rgba(19,18,16,.98));box-shadow:0 18px 42px rgba(0,0,0,.26),0 0 44px rgba(217,174,83,.045),inset 0 1px 0 rgba(255,255,255,.035)}.daily-quest-glow{position:absolute;width:180px;height:180px;right:-70px;top:-70px;border-radius:50%;background:radial-gradient(circle,rgba(217,174,83,.18),transparent 68%);filter:blur(10px);animation:questGlow 4.8s ease-in-out infinite alternate}.daily-quest-head{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.quest-kicker{display:block;font-size:9px;letter-spacing:.14em;color:var(--accent);font-weight:850}.daily-quest-head h3{margin:4px 0 0;font-size:17px;letter-spacing:-.02em}.quest-status{font-size:9px;color:var(--ink-faint);padding:6px 8px;border:1px solid rgba(255,255,255,.07);border-radius:999px;white-space:nowrap}.daily-quest-body{position:relative;z-index:1;display:flex;align-items:center;gap:12px;margin-top:12px}.quest-icon{width:46px;height:46px;display:grid;place-items:center;border-radius:14px;background:linear-gradient(145deg,rgba(240,209,134,.14),rgba(217,174,83,.04));border:1px solid rgba(240,209,134,.16);font-size:20px;box-shadow:0 0 26px rgba(217,174,83,.08);flex:none}.quest-copy{min-width:0}.quest-copy p{margin:0;font-size:13px;line-height:1.35;font-weight:700}.quest-copy small{display:block;margin-top:4px;color:var(--ink-faint);font-size:9px}.quest-done-btn{position:relative;z-index:1;width:100%;margin-top:13px;min-height:40px;border:1px solid rgba(255,255,255,.08);border-radius:12px;background:rgba(255,255,255,.035);color:var(--ink);font-weight:750;cursor:pointer;transition:transform .2s,border-color .2s,background .2s,box-shadow .2s}.quest-done-btn:hover{transform:translateY(-1px);border-color:rgba(240,209,134,.24);background:rgba(217,174,83,.07)}.quest-done-btn.completed{color:#11100d;background:linear-gradient(145deg,#f0d186,#d9ae53);border-color:#f0d186;box-shadow:0 0 24px rgba(217,174,83,.18)}
+@keyframes questGlow{from{transform:scale(.9);opacity:.55}to{transform:scale(1.15);opacity:1}}
+
+/* Monthly stats */
+.monthly-head{margin-top:20px}.monthly-panel{padding:14px}.monthly-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}.monthly-toolbar>div{display:grid;gap:3px}.monthly-toolbar b{font-size:12px}.monthly-toolbar small{font-size:8.5px;color:var(--ink-faint)}.monthly-toolbar select{min-width:88px;border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:8px 10px;background:#12110f;color:var(--ink);font:inherit;font-size:10px;outline:none}.monthly-summary-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.monthly-item{padding:10px;border-radius:14px;border:1px solid rgba(255,255,255,.055);background:linear-gradient(165deg,rgba(255,255,255,.025),rgba(255,255,255,.012));min-height:105px}.monthly-item-head{display:flex;justify-content:space-between;gap:8px;align-items:center}.monthly-item-head strong{font-size:10px;letter-spacing:.06em;text-transform:uppercase}.monthly-item-head span{font-size:8px;color:var(--ink-faint)}.monthly-rate{margin-top:8px;font-size:25px;font-weight:850;letter-spacing:-.04em}.monthly-meta{display:flex;justify-content:space-between;margin-top:4px;color:var(--ink-faint);font-size:8.5px}.monthly-track{height:4px;border-radius:999px;background:rgba(255,255,255,.05);margin-top:9px;overflow:hidden}.monthly-track i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#6f5930,var(--accent-2));box-shadow:0 0 12px rgba(217,174,83,.16)}.monthly-item.future{opacity:.38}.monthly-item.current{border-color:rgba(217,174,83,.22);box-shadow:0 0 24px rgba(217,174,83,.05)}
+
+/* Calendar clarity */
+.calendar-current-day{margin:9px 0 10px;padding:9px 11px;border-radius:11px;border:1px solid rgba(217,174,83,.15);background:rgba(217,174,83,.055);color:var(--ink);font-size:10px;font-weight:750}.calendar-legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:9px;color:var(--ink-faint);font-size:8.5px}.calendar-legend span{display:inline-flex;align-items:center;gap:5px}.legend-dot{width:6px;height:6px;border-radius:50%;background:var(--ink-faint)}.legend-dot.today{background:var(--accent-2);box-shadow:0 0 8px rgba(240,209,134,.45)}.legend-dot.event{background:#86ab78}.legend-dot.holiday{background:#f0d186;box-shadow:0 0 7px rgba(240,209,134,.24)}.calendar-source{margin-top:8px;color:var(--ink-faint);font-size:8px;line-height:1.35}.day.important{position:relative;box-shadow:inset 0 0 0 1px rgba(134,171,120,.18),0 0 0 1px rgba(134,171,120,.04)}.day.holiday{box-shadow:inset 0 0 0 1px rgba(240,209,134,.26),0 0 16px rgba(217,174,83,.05)}.day.today{box-shadow:inset 0 0 0 2px rgba(240,209,134,.82),0 0 20px rgba(217,174,83,.10)}.day.today:after{content:"";position:absolute;right:5px;top:5px;width:5px;height:5px;border-radius:50%;background:#f0d186;box-shadow:0 0 7px rgba(240,209,134,.7)}.day-event-dot{position:absolute;left:50%;bottom:4px;width:4px;height:4px;border-radius:50%;background:#86ab78;transform:translateX(-50%)}.day.holiday .day-event-dot{background:#f0d186}
+.day-modal-important{display:grid;gap:7px;margin:8px 0}.day-modal-important .modal-event{padding:9px 10px;border-radius:11px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.05)}.day-modal-important .modal-event strong{display:block;font-size:10.5px}.day-modal-important .modal-event small{display:block;margin-top:2px;font-size:8.5px;color:var(--ink-faint)}.day-readonly-hint{margin:8px 0;padding:8px 10px;border-radius:10px;background:rgba(118,215,255,.04);border:1px solid rgba(118,215,255,.08);font-size:8.5px;color:var(--ink-faint)}
+
+@media(max-width:760px){#htx-day-context{align-items:flex-start;flex-direction:column}.htx-event-chips{justify-content:flex-start}.monthly-summary-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:540px){.monthly-summary-grid{grid-template-columns:1fr}.daily-quest-head{align-items:flex-start}.quest-status{font-size:8px}.htx-important-item{grid-template-columns:auto minmax(0,1fr)}.htx-important-item .event-tag{grid-column:2}.htx-day-context-main strong{white-space:normal}}
+@media(prefers-reduced-motion:reduce){.daily-quest-glow{animation:none}.quest-done-btn,.monthly-item,.htx-day-intel{transition:none}}
+</style>\n</head>
 <body>
 <div id="htx-loading-fallback" style="display:none"></div>
 
@@ -627,6 +649,14 @@ body::after{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;opa
     <div><div class="app-eyebrow">DAILY SYSTEM</div><h1>Habit Tracker</h1><p>Build small wins. Keep them alive.</p><div class="live-line"><i></i> Live progress · <span id="liveDate">Today</span></div></div>
     <button class="icon-btn" id="quickAdd" title="Add task">＋</button>
   </header>
+  <section id="htx-day-context" aria-live="polite">
+    <div class="htx-day-context-main">
+      <span class="htx-context-kicker">TODAY</span>
+      <strong id="globalDateLabel">Loading date…</strong>
+      <span id="globalDayStatus">Local day · Tasks reset daily</span>
+    </div>
+    <div id="globalEventChips" class="htx-event-chips"></div>
+  </section>
   <main>
     <section class="hero-grid">
       <article class="ui-card completion-card">
@@ -638,17 +668,58 @@ body::after{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;opa
       <article class="ui-card focus-card"><div class="quote-mark">//</div><p id="quote">Consistency beats intensity when nobody is watching.</p><small>Focus for today · <span id="focusOpen">0</span> habits still open</small></article>
     </section>
 
+    <section id="htx-day-intel" class="ui-card htx-day-intel">
+      <div class="htx-intel-head">
+        <div>
+          <span class="htx-intel-kicker">DAY INTEL</span>
+          <strong id="intelDateLabel">Today</strong>
+        </div>
+        <span id="intelEventCount" class="htx-intel-count">0 events</span>
+      </div>
+      <div id="todayImportantDays" class="htx-important-list"></div>
+      <div id="todayImportantSource" class="htx-intel-source">Thai calendar · bank holidays · international observances</div>
+    </section>
+
     <div class="section-head"><h2>TODAY'S HABITS</h2><span id="sectionCount">0 of 0 complete</span></div>
     <section id="habitList" class="habit-grid"></section>
+
+    <section id="dailyQuestCard" class="ui-card daily-quest-card">
+      <div class="daily-quest-glow"></div>
+      <div class="daily-quest-head">
+        <div>
+          <span class="quest-kicker">RANDOM DAILY QUEST</span>
+          <h3 id="questTitle">Preparing today’s quest…</h3>
+        </div>
+        <span id="questStatus" class="quest-status">1 quest / day</span>
+      </div>
+      <div class="daily-quest-body">
+        <div id="questIcon" class="quest-icon">⚡</div>
+        <div class="quest-copy">
+          <p id="questDescription">Loading…</p>
+          <small id="questMeta">One deterministic quest for today</small>
+        </div>
+      </div>
+      <button id="questDoneBtn" class="quest-done-btn" type="button">Mark quest complete</button>
+    </section>
+
     <section class="section-head"><h2>DAILY NOTE</h2><span>Saved by date</span></section>
     <section class="ui-card note-card"><textarea id="noteBox" placeholder="Write a note for today…"></textarea><div class="note-save" id="noteSaveStatus">Saved automatically</div></section>
 
     <div class="section-head"><h2>MOMENTUM</h2><span>Last 7 days</span></div>
     <section class="ui-card chart-card"><div id="bars" class="bars"></div><div class="chart-labels"><span>7d ago</span><span>Today</span></div></section>
 
-    <section id="viewStats" class="page-view"><div class="section-head"><h2>STATS</h2><span>All time</span></div><div class="stats-grid"><div class="ui-card stat"><b id="statTotal">0</b><small>Total completions</small></div><div class="ui-card stat"><b id="statRate">0%</b><small>Completion rate</small></div><div class="ui-card stat"><b id="statBest">0</b><small>Best day</small></div><div class="ui-card stat"><b id="statHabits">0</b><small>Active habits</small></div></div></section>
+    <section id="viewStats" class="page-view"><div class="section-head"><h2>STATS</h2><span>All time</span></div><div class="stats-grid"><div class="ui-card stat"><b id="statTotal">0</b><small>Total completions</small></div><div class="ui-card stat"><b id="statRate">0%</b><small>Completion rate</small></div><div class="ui-card stat"><b id="statBest">0</b><small>Best day</small></div><div class="ui-card stat"><b id="statHabits">0</b><small>Active habits</small></div></div>
+      <div class="section-head monthly-head"><h2>MONTHLY OVERVIEW</h2><span>Every month, clearly</span></div>
+      <section class="ui-card monthly-panel">
+        <div class="monthly-toolbar">
+          <div><b>Monthly performance</b><small id="monthlyYearHint">2026 · based on recorded days</small></div>
+          <select id="monthlyYearSelect" aria-label="Choose year"></select>
+        </div>
+        <div id="monthlySummaryGrid" class="monthly-summary-grid"></div>
+      </section>
+    </section>
     <section id="viewHistory" class="page-view"><div class="section-head"><h2>HISTORY</h2><span>Recent days</span></div><div id="historyList" class="ui-card history-list"></div></section>
-    <section id="viewCalendar" class="page-view"><div class="section-head"><h2>CALENDAR</h2><span id="calendarMonth"></span></div><div class="ui-card calendar-card"><div class="cal-head"><button id="prevMonth">‹</button><strong id="calTitle"></strong><button id="nextMonth">›</button></div><div class="week"><span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span></div><div id="calendarGrid" class="calendar-grid"></div></div></section>
+    <section id="viewCalendar" class="page-view"><div class="section-head"><h2>CALENDAR</h2><span id="calendarMonth"></span></div><div class="ui-card calendar-card"><div class="cal-head"><button id="prevMonth">‹</button><strong id="calTitle"></strong><button id="nextMonth">›</button></div><div id="calendarCurrentDay" class="calendar-current-day">Today · loading…</div><div class="week"><span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span></div><div id="calendarGrid" class="calendar-grid"></div><div class="calendar-legend"><span><i class="legend-dot today"></i>Today</span><span><i class="legend-dot event"></i>Important day</span><span><i class="legend-dot holiday"></i>Holiday / bank holiday</span></div><div class="calendar-source">Calendar data: Thai annual observances, Bank of Thailand holidays, major international observances · 2026 verified set</div></div></section>
     <section id="viewSettings" class="page-view"><div class="section-head"><h2>SETTINGS</h2><span>Data & preferences</span></div>
 
     <div class="ui-card settings-card">
@@ -657,22 +728,17 @@ body::after{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;opa
         <span class="sync-dot ok" id="licenseDot"></span>
       </div>
       <div class="sync-status" id="licenseStatus">Verified</div>
+      <div class="sync-status ok" id="licenseSyncStatus">Cloud sync · Active · tied to this license</div>
       <div class="htx-account-row">
         <span class="htx-account-badge" id="licenseDeviceStatus">Device 1/1</span>
         <button id="logoutDeviceBtn" type="button">Device logged out</button>
       </div>
     </div>
 
-    <div class="ui-card settings-card sync-card">
-      <div class="sync-title"><div><b>🔗 Sync code</b><small>Use the same code on your phone and PC.</small></div><span class="sync-dot" id="syncDot"></span></div>
-      <div class="sync-input-row"><input id="syncCodeInput" type="text" placeholder="e.g. fox-4821" autocomplete="off" autocapitalize="off" spellcheck="false"><button id="syncGenBtn" type="button">Generate</button></div>
-      <div class="settings-actions"><button id="syncSaveBtn" class="primary">Save & sync</button><button id="syncPullBtn">Pull latest</button><button id="syncOffBtn" class="danger">Turn off sync</button></div>
-      <div id="syncStatus" class="sync-status">Not connected — local only.</div>
-    </div>
     <div class="ui-card settings-card"><label>Daily quote<input id="quoteInput" type="text"></label><div class="settings-actions"><button id="exportBtn">Export data</button><button id="importBtn">Import data</button><button id="resetBtn" class="danger">Reset all</button></div><input id="importFile" type="file" accept="application/json" hidden></div></section>
   </main>
   <nav class="app-nav"><button class="active" data-view="today">Today</button><button data-view="stats">Stats</button><button data-view="history">History</button><button data-view="calendar">Calendar</button><button data-view="settings">Settings</button></nav>
-  <div id="dayModal" class="modal"><div class="modal-box day-modal-box"><div class="modal-head"><h3 id="dayModalTitle">Day detail</h3><button id="dayModalClose">×</button></div><div id="dayModalSummary" class="day-summary"></div><div id="dayModalHabits" class="day-habits"></div><label>Note for this day<textarea id="dayNoteInput" class="day-note-input" placeholder="No note yet…"></textarea></label><div class="modal-actions"><button id="dayNoteSave" class="primary">Save note</button></div></div></div>
+  <div id="dayModal" class="modal"><div class="modal-box day-modal-box"><div class="modal-head"><h3 id="dayModalTitle">Day detail</h3><button id="dayModalClose">×</button></div><div id="dayModalSummary" class="day-summary"></div><div id="dayModalImportant" class="day-modal-important"></div><div class="day-readonly-hint">Tasks are completed only on Today. This day view is read-only for habit check-offs.</div><div id="dayModalHabits" class="day-habits"></div><label>Note for this day<textarea id="dayNoteInput" class="day-note-input" placeholder="No note yet…"></textarea></label><div class="modal-actions"><button id="dayNoteSave" class="primary">Save note</button></div></div></div>
   <div id="modal" class="modal"><div class="modal-box"><div class="modal-head"><h3 id="modalTitle">Add habit</h3><button id="closeModal">×</button></div><label>Habit name<input id="nameInput" maxlength="40" placeholder="e.g. Read 20 minutes"></label><label>Goal / detail<input id="detailInput" maxlength="50" placeholder="e.g. 20 min"></label><label>Icon<input id="emojiInput" maxlength="4" value="✨"></label><div class="modal-actions"><button id="deleteBtn" class="danger">Delete</button><button id="saveBtn" class="primary">Save habit</button></div></div></div>
 </div>
 <style>
@@ -727,6 +793,8 @@ body::after{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;opa
   .htx-account-row{margin-top:10px;display:flex;justify-content:space-between;align-items:center;gap:10px}
   .htx-account-badge{font-size:10px;color:#777164}
   #logoutDeviceBtn{border:1px solid rgba(181,101,74,.25)!important;color:#e8b0a7!important}
+  #licenseSyncStatus.ok{color:#b9d8b0!important}
+  #licenseSyncStatus.err{color:#e8b0a7!important}
   @media(max-width:520px){.htx-auth-card{padding:22px}.htx-auth-title{font-size:26px}}
 </style>
 <div id="htx-auth-gate" aria-label="Key login">
@@ -771,6 +839,7 @@ body::after{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;opa
   const dataKeyPrefix='habit-tracker-v6:';
   let dataKey='', db=null, editId=null, calDate=new Date(), currentAuth=null, ready=false, entering=false, p=0, loadingStarted=false;
   const deviceId=()=>{let id=localStorage.getItem(DEVICE_KEY);if(!id){id=(crypto.randomUUID?crypto.randomUUID():'dev-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2));localStorage.setItem(DEVICE_KEY,id)}return id};
+  const SUPABASE_URL='https://avzshytxewxocwrcyxli.supabase.co',SUPABASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhbGciOiJIUzI1NiIsInJlZiI6ImF2enNoeXR4ZXd4b2N3cmN5eGxpIiwiaWF0IjoxNzg5NTQ2NzE4LCJleHAiOjIxMDUxMjI3MTh9.sSd0fM0B2426PE4MBInPpM4flYisTMXfdLUhbCPyBOQ';
   const setAuthMsg=(msg,type='')=>{authMsg.textContent=msg;authMsg.className='htx-auth-msg'+(type?' '+type:'')};
   const initDb=()=>{dataKey=dataKeyPrefix+currentAuth.licenseId;db=JSON.parse(localStorage.getItem(dataKey)||'null')||JSON.parse(JSON.stringify(defaults));db.records=db.records||{}};
   const api=async(url,opts={})=>{const r=await fetch(url,{credentials:'include',headers:{'Content-Type':'application/json',...(opts.headers||{})},...opts});let j=null;try{j=await r.json()}catch{};if(!r.ok)throw new Error(j?.error||'Request failed');return j};
@@ -778,20 +847,42 @@ body::after{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;opa
   const showLoading=()=>{document.body.classList.add('htx-auth-lock');authGate.classList.add('hidden');intro.classList.remove('htx-preauth');intro.style.display='grid';startLoading()};
   const states=[[0,'Initializing interface'],[18,'Loading routines'],[38,'Syncing daily data'],[60,'Calibrating focus'],[78,'Preparing your space'],[91,'Verifying local storage'],[100,'System ready']];
   const label=x=>states.reduce((a,v)=>x>=v[0]?v[1]:a,states[0][1]);
-  const todayKey=()=>{const d=new Date();return d.toISOString().slice(0,10)};
-  function renderLicense(s){const e=document.getElementById('licenseDeviceStatus');const role=s.role==='developer'?'Developer key · Unlimited devices':`Device ${s.deviceCount||1}/${s.maxDevices||1}`;if(e)e.textContent=role;const st=document.getElementById('licenseStatus');if(st)st.textContent=`Key ${s.keyMasked||''} · ${s.role==='developer'?'Developer':'User'}`}
+  const todayKey=()=>{const d=new Date();const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,'0'),day=String(d.getDate()).padStart(2,'0');return `${y}-${m}-${day}`};
+  function renderLicense(s){const e=document.getElementById('licenseDeviceStatus');const role=s.role==='developer'?'Developer key · Unlimited devices':`Device ${s.deviceCount||1}/${s.maxDevices||1}`;if(e)e.textContent=role;const st=document.getElementById('licenseStatus');if(st)st.textContent=`Key ${s.keyMasked||''} · ${s.role==='developer'?'Developer':'User'}`;const ss=document.getElementById('licenseSyncStatus');if(ss){ss.textContent='Cloud sync · Active';ss.className='sync-status ok'}}
   document.getElementById('logoutDeviceBtn').onclick=async()=>{if(!confirm('Log out this device? You will need the key again on this device.'))return;try{await api('/api/auth?action=logout',{method:'POST',body:JSON.stringify({deviceId:deviceId()})});location.reload()}catch(e){alert(e.message||'Could not log out device.')}};
-  const save=()=>{localStorage.setItem(dataKey,JSON.stringify(db));localStorage.setItem('habit-tracker-sync-updated-v1',String(Date.now()));};
-  const ensureHistory=()=>{const k=todayKey();const done=db.habits.filter(h=>h.done).length;db.history[k]=done;db.records[k]=db.records[k]||{};db.records[k].habits=db.habits.map(h=>({id:h.id,name:h.name,emoji:h.emoji,done:!!h.done}));db.records[k].note=db.records[k].note??'';};
-  function saveDayRecord(k){const key=k||todayKey();db.records=db.records||{};db.records[key]=db.records[key]||{};db.records[key].habits=db.habits.map(h=>({id:h.id,name:h.name,emoji:h.emoji,done:!!h.done}));db.records[key].note=(key===todayKey()?document.getElementById('noteBox')?.value:(db.records[key].note||''));db.history[key]=db.records[key].habits.filter(h=>h.done).length;save()}
+  const SYNC_META=()=>`habit-tracker-license-sync-updated-v1:${currentAuth?.licenseId||'none'}`;
+  const LICENSE_SYNC_CODE=()=>`license-${currentAuth?.licenseId||'none'}`;
+  let licenseSyncReady=false,licenseSyncTimer=null,licenseSyncBusy=false;
+  const localSave=()=>{localStorage.setItem(dataKey,JSON.stringify(db));localStorage.setItem(SYNC_META(),String(Date.now()))};
+  const save=()=>{localSave();if(licenseSyncReady){clearTimeout(licenseSyncTimer);licenseSyncTimer=setTimeout(()=>pushLicenseSync(),450)}};
+  const setLicenseSyncStatus=(t,c='')=>{const e=document.getElementById('licenseSyncStatus');if(e){e.textContent=t;e.className='sync-status'+(c?' '+c:'')}};
+  async function fetchSyncRow(code){const res=await fetch(SUPABASE_URL+'/rest/v1/habit_tracker_sync?sync_code=eq.'+encodeURIComponent(code)+'&select=data,updated_at',{headers:{apikey:SUPABASE_ANON_KEY,Authorization:'Bearer '+SUPABASE_ANON_KEY}});if(!res.ok)throw new Error('sync fetch failed');const rows=await res.json();return rows[0]||null}
+  async function pushSyncRow(code){const updatedAt=Date.now();localStorage.setItem(SYNC_META(),String(updatedAt));const res=await fetch(SUPABASE_URL+'/rest/v1/habit_tracker_sync',{method:'POST',headers:{apikey:SUPABASE_ANON_KEY,Authorization:'Bearer '+SUPABASE_ANON_KEY,'Content-Type':'application/json',Prefer:'resolution=merge-duplicates,return=minimal'},body:JSON.stringify({sync_code:code,data:{app:'habit-tracker-v6',db,updatedAt},updated_at:new Date(updatedAt).toISOString()})});if(!res.ok)throw new Error('sync push failed')}
+  async function pushLicenseSync(){if(!currentAuth?.licenseId||!licenseSyncReady||licenseSyncBusy)return false;licenseSyncBusy=true;try{await pushSyncRow(LICENSE_SYNC_CODE());setLicenseSyncStatus('Cloud sync · Saved','ok');return true}catch(e){setLicenseSyncStatus('Cloud sync · Retry pending','err');return false}finally{licenseSyncBusy=false}}
+  async function pullLicenseSync(){if(!currentAuth?.licenseId||licenseSyncBusy)return false;licenseSyncBusy=true;try{const code=LICENSE_SYNC_CODE();let row=await fetchSyncRow(code);if(!row?.data){const legacyKey=`habit-tracker-sync-code-v1:${currentAuth.licenseId}`;const legacyCode=localStorage.getItem(legacyKey)||'';if(legacyCode){try{row=await fetchSyncRow(legacyCode)}catch{}if(row?.data?.db){db=row.data.db;localStorage.setItem(dataKey,JSON.stringify(db));localStorage.setItem(SYNC_META(),String(new Date(row.updated_at).getTime()||row.data.updatedAt||Date.now()));await pushSyncRow(code);localStorage.removeItem(legacyKey);setLicenseSyncStatus('Cloud sync · Migrated','ok');return true}}}if(!row?.data?.db){await pushSyncRow(code);setLicenseSyncStatus('Cloud sync · Active','ok');return false}const remoteAt=new Date(row.updated_at).getTime()||Number(row.data.updatedAt)||0;const localAt=Number(localStorage.getItem(SYNC_META())||0);if(remoteAt>localAt){db=row.data.db;localStorage.setItem(dataKey,JSON.stringify(db));localStorage.setItem(SYNC_META(),String(remoteAt));setLicenseSyncStatus('Cloud sync · Updated','ok');return true}if(localAt>remoteAt)await pushSyncRow(code);setLicenseSyncStatus('Cloud sync · Active','ok');return false}catch(e){setLicenseSyncStatus('Cloud sync · Offline, local data safe','err');return false}finally{licenseSyncBusy=false}}
+  async function reconcileLicenseSync(){licenseSyncReady=false;const applied=await pullLicenseSync();licenseSyncReady=true;clearInterval(window.__habitLicensePullTimer);window.__habitLicensePullTimer=setInterval(async()=>{const changed=await pullLicenseSync();if(changed)render()},15000);window.addEventListener('pagehide',()=>{pushLicenseSync()},{once:true});return applied}
+  const ensureHistory=()=>{
+    if(!db)return;
+    db.records=db.records||{};
+    const k=todayKey(),prev=localStorage.getItem('habit-tracker-last-day-key-v2');
+    if(!db.records[k]||!Array.isArray(db.records[k].habits)){
+      const seedFromLegacy=!prev||prev===k;
+      db.records[k]={habits:db.habits.map(h=>({id:h.id,name:h.name,emoji:h.emoji,done:seedFromLegacy?!!h.done:false})),note:db.records[k]?.note||''};
+    }
+    const rec=db.records[k];
+    for(const h of db.habits){const rh=rec.habits.find(x=>x.id===h.id);h.done=!!rh?.done;}
+    db.history[k]=rec.habits.filter(h=>h.done).length;
+    localStorage.setItem('habit-tracker-last-day-key-v2',k);
+  };
+  function saveDayRecord(k){const key=k||todayKey();if(key!==todayKey())return;db.records=db.records||{};db.records[key]=db.records[key]||{habits:[],note:''};const rec=db.records[key];rec.habits=Array.isArray(rec.habits)?rec.habits:[];for(const h of db.habits){const rh=rec.habits.find(x=>x.id===h.id);if(rh){rh.name=h.name;rh.emoji=h.emoji;rh.done=!!h.done}else rec.habits.push({id:h.id,name:h.name,emoji:h.emoji,done:!!h.done})}rec.habits=rec.habits.filter(rh=>db.habits.some(h=>h.id===rh.id));if(document.getElementById('noteBox'))rec.note=document.getElementById('noteBox').value;db.history[key]=rec.habits.filter(h=>h.done).length;save()}
   function getDayRecord(k){return (db.records&&db.records[k])||{habits:[],note:''}}
 
   function startLoading(){if(loadingStarted)return;loadingStarted=true;ready=false;entering=false;p=0;fill.style.width='0%';percent.textContent='0%';status.textContent='Initializing interface';prompt.classList.remove('ready');const timer=setInterval(()=>{p=Math.min(100,p+Math.max(1,Math.round((100-p)*.075)));if(p>98)p=100;fill.style.width=p+'%';percent.textContent=p+'%';status.textContent=label(p);if(p>=100){clearInterval(timer);setTimeout(finish,120)}},55);setTimeout(finish,4200)}
   function finish(){if(ready)return;ready=true;p=100;fill.style.width='100%';percent.textContent='100%';status.textContent='System ready';prompt.classList.add('ready')}
   function enter(){if(!ready||entering)return;entering=true;document.removeEventListener('keydown',key);intro.removeEventListener('pointerdown',enter);flash.classList.add('fire');prompt.classList.remove('ready');app.classList.add('show');document.body.classList.remove('htx-auth-lock');document.body.style.overflow='auto';intro.classList.add('htx-leave');setTimeout(()=>intro.remove(),850);render()}
   function key(e){if(e.code==='Enter'||e.code==='Space'){e.preventDefault();enter()}}
-  async function bootstrapAuth(){try{const s=await api('/api/auth?action=session',{method:'GET'});if(s.authenticated){currentAuth=s;initDb();renderLicense(s);showLoading();return}showAppLogin()}catch(e){showAppLogin();setAuthMsg('Could not verify access. Please try again.','err')}}
-  authForm.addEventListener('submit',async e=>{e.preventDefault();const keyValue=authInput.value.trim();if(!keyValue)return;authBtn.disabled=true;setAuthMsg('Verifying key…');try{const s=await api('/api/auth?action=login',{method:'POST',body:JSON.stringify({key:keyValue,deviceId:deviceId()})});currentAuth=s;initDb();authInput.value='';setAuthMsg('Access granted.','ok');renderLicense(s);setTimeout(showLoading,180)}catch(err){setAuthMsg(err.message||'Invalid key.','err')}finally{authBtn.disabled=false}});
+  async function bootstrapAuth(){try{const s=await api('/api/auth?action=session',{method:'GET'});if(s.authenticated){currentAuth=s;initDb();await reconcileLicenseSync();renderLicense(s);showLoading();return}showAppLogin()}catch(e){showAppLogin();setAuthMsg('Could not verify access. Please try again.','err')}}
+  authForm.addEventListener('submit',async e=>{e.preventDefault();const keyValue=authInput.value.trim();if(!keyValue)return;authBtn.disabled=true;setAuthMsg('Verifying key…');try{const s=await api('/api/auth?action=login',{method:'POST',body:JSON.stringify({key:keyValue,deviceId:deviceId()})});currentAuth=s;initDb();authInput.value='';setAuthMsg('Access granted.','ok');await reconcileLicenseSync();renderLicense(s);setTimeout(showLoading,180)}catch(err){setAuthMsg(err.message||'Invalid key.','err')}finally{authBtn.disabled=false}});
   document.addEventListener('keydown',key);intro.addEventListener('pointerdown',enter);
   document.body.classList.add('htx-auth-lock');bootstrapAuth();
 
@@ -812,11 +903,285 @@ body::after{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;opa
   document.getElementById('dayModalClose').onclick=()=>document.getElementById('dayModal').classList.remove('show');document.getElementById('dayModal').addEventListener('click',e=>{if(e.target.id==='dayModal')document.getElementById('dayModal').classList.remove('show')});
   function renderCalendar(){const y=calDate.getFullYear(),m=calDate.getMonth();document.getElementById('calTitle').textContent=calDate.toLocaleDateString(undefined,{month:'long',year:'numeric'});document.getElementById('calendarMonth').textContent=calDate.toLocaleDateString(undefined,{month:'long'});const grid=document.getElementById('calendarGrid');grid.innerHTML='';const first=new Date(y,m,1).getDay(),days=new Date(y,m+1,0).getDate();for(let i=0;i<first;i++){const x=document.createElement('div');x.className='day empty';grid.appendChild(x)}for(let d=1;d<=days;d++){const x=document.createElement('div');const k=`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;const rec=getDayRecord(k);const count=db.history[k]||0;x.className='day'+(k===todayKey()?' today':'')+(count>0?' done':'');x.textContent=d;x.title=count+' completed';x.dataset.dayKey=k;x.onclick=()=>openDayDetail(k);grid.appendChild(x)}}
   document.getElementById('prevMonth').onclick=()=>{calDate.setMonth(calDate.getMonth()-1);renderCalendar()};document.getElementById('nextMonth').onclick=()=>{calDate.setMonth(calDate.getMonth()+1);renderCalendar()};
-  document.getElementById('quoteInput').value=db.quote||quotes[0];document.getElementById('syncCodeInput').value=getSyncCode();if(getSyncCode())syncStatus('Connected · '+getSyncCode(),'ok');document.getElementById('quoteInput').onchange=e=>{db.quote=e.target.value||quotes[0];render()};
+  document.getElementById('quoteInput').value=db.quote||quotes[0];document.getElementById('quoteInput').onchange=e=>{db.quote=e.target.value||quotes[0];render()};
   let noteTimer;document.getElementById('noteBox').addEventListener('input',e=>{clearTimeout(noteTimer);document.getElementById('noteSaveStatus').textContent='Saving…';noteTimer=setTimeout(()=>{db.records=db.records||{};db.records[todayKey()]=db.records[todayKey()]||{};db.records[todayKey()].note=e.target.value;db.history[todayKey()]=db.habits.filter(h=>h.done).length;save();document.getElementById('noteSaveStatus').textContent='Saved automatically';renderHistory();renderCalendar()},350)});
-    const SUPABASE_URL='https://avzshytxewxocwrcyxli.supabase.co',SUPABASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhbGciOiJIUzI1NiIsInJlZiI6ImF2enNoeXR4ZXd4b2N3cmN5eGxpIiwiaWF0IjoxNzg5NTQ2NzE4LCJleHAiOjIxMDUxMjI3MTh9.sSd0fM0B2426PE4MBInPpM4flYisTMXfdLUhbCPyBOQ';const SYNC_KEY=()=>`habit-tracker-sync-code-v1:${currentAuth?.licenseId||'none'}`,SYNC_META=()=>`habit-tracker-sync-updated-v1:${currentAuth?.licenseId||'none'}`;const getSyncCode=()=>localStorage.getItem(SYNC_KEY())||'';const syncStatus=(t,c)=>{const e=document.getElementById('syncStatus'),d=document.getElementById('syncDot');if(e)e.textContent=t;if(d)d.className='sync-dot'+(c?' '+c:'')};const syncPayload=()=>({app:'habit-tracker-v6',db,updatedAt:Number(localStorage.getItem(SYNC_META())||Date.now())});const touchSync=()=>localStorage.setItem(SYNC_META(),String(Date.now()));async function pushSync(){const code=getSyncCode().trim();if(!code)return false;syncStatus('Saving to sync…');try{touchSync();const data=syncPayload();const res=await fetch(SUPABASE_URL+'/rest/v1/habit_tracker_sync',{method:'POST',headers:{apikey:SUPABASE_ANON_KEY,Authorization:'Bearer '+SUPABASE_ANON_KEY,'Content-Type':'application/json',Prefer:'resolution=merge-duplicates,return=minimal'},body:JSON.stringify({sync_code:code,data,updated_at:new Date(data.updatedAt).toISOString()})});if(!res.ok)throw new Error();syncStatus('Synced just now · '+code,'ok');return true}catch(e){syncStatus('Could not reach sync server — data remains local','err');return false}}async function pullSync(){const code=getSyncCode().trim();if(!code)return {applied:false,hadData:false};syncStatus('Checking for updates…');try{const res=await fetch(SUPABASE_URL+'/rest/v1/habit_tracker_sync?sync_code=eq.'+encodeURIComponent(code)+'&select=data,updated_at');if(!res.ok)throw new Error();const rows=await res.json();if(!rows[0]?.data){syncStatus('No shared data under this code yet.');return {applied:false,hadData:false}}const remote=rows[0],remoteAt=new Date(remote.updated_at).getTime()||remote.data.updatedAt||0,localAt=Number(localStorage.getItem(SYNC_META())||0);if(remoteAt>localAt&&remote.data.db){db=remote.data.db;localStorage.setItem(dataKey,JSON.stringify(db));localStorage.setItem(SYNC_META(),String(remoteAt));syncStatus('Latest data pulled','ok');return {applied:true,hadData:true}}syncStatus('Already up to date','ok');return {applied:false,hadData:true}}catch(e){syncStatus('Could not reach sync server','err');return {applied:false,hadData:false}}}const genSync=()=>{const w=['fox','maple','coral','ember','lotus','onyx','plum','sable','tide','wren','birch','jade'];return w[Math.floor(Math.random()*w.length)]+'-'+Math.floor(1000+Math.random()*9000)};document.getElementById('syncGenBtn').onclick=()=>document.getElementById('syncCodeInput').value=genSync();document.getElementById('syncSaveBtn').onclick=async()=>{const code=document.getElementById('syncCodeInput').value.trim();if(!code){syncStatus('Enter or generate a code first','err');return}localStorage.setItem(SYNC_KEY(),code);const r=await pullSync();if(r.applied){render();alert('Latest synced data loaded.')}else{await pushSync();render()}};document.getElementById('syncPullBtn').onclick=async()=>{const r=await pullSync();if(r.applied){render();alert('Latest data loaded.')}};document.getElementById('syncOffBtn').onclick=()=>{localStorage.removeItem(SYNC_KEY());syncStatus('Not connected — local only.');document.getElementById('syncDot').className='sync-dot'};
-  window.addEventListener('pagehide',()=>{if(getSyncCode())pushSync()});
+  document.addEventListener('visibilitychange',async()=>{if(document.visibilityState==='visible'&&licenseSyncReady){const changed=await pullLicenseSync();if(changed)render()}});
 document.getElementById('exportBtn').onclick=()=>{const blob=new Blob([JSON.stringify(db,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='habit-tracker-backup.json';a.click();URL.revokeObjectURL(a.href)};document.getElementById('importBtn').onclick=()=>document.getElementById('importFile').click();document.getElementById('importFile').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{db=JSON.parse(r.result);db.records=db.records||{};localStorage.setItem(dataKey,JSON.stringify(db));touchSync();render();alert('Data imported.')}catch{alert('Invalid backup file.')}};r.readAsText(f)};document.getElementById('resetBtn').onclick=()=>{if(confirm('Reset all habit data?')){localStorage.removeItem(dataKey);location.reload()}};
+  const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const DAY_NAMES=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const monthlyYearState={value:new Date().getFullYear()};
+  const eventTypeIcon={holiday:'🏦',religious:'🕯️',thai:'🇹🇭',international:'🌍',cultural:'🎎',fun:'✨'};
+
+  const localDateKey=(d=new Date())=>{const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,'0'),day=String(d.getDate()).padStart(2,'0');return `${y}-${m}-${day}`};
+  // 2026 verified Thai public/bank holidays and broad annual observances.
+  const IMPORTANT_DAYS={
+    '2026-01-01':[{name:'วันขึ้นปีใหม่ / New Year’s Day',type:'holiday',desc:'วันเริ่มต้นปีปฏิทิน'}],
+    '2026-01-02':[{name:'วันหยุดทำการเพิ่มเป็นกรณีพิเศษ',type:'holiday',desc:'วันหยุดพิเศษของสถาบันการเงิน'}],
+    '2026-01-04':[{name:'วันอักษรเบรลล์โลก',type:'international',desc:'วันตระหนักรู้และส่งเสริมการเข้าถึงของคนตาบอด'}],
+    '2026-01-10':[{name:'วันเด็กแห่งชาติ',type:'thai',desc:'วันสำคัญสำหรับเด็กและเยาวชนไทย'}],
+    '2026-01-13':[{name:'วันการบินแห่งชาติ',type:'thai',desc:'วันสำคัญด้านการบินของไทย'}],
+    '2026-01-14':[{name:'วันอนุรักษ์ทรัพยากรป่าไม้ของชาติ',type:'thai',desc:'วันรณรงค์อนุรักษ์ป่าไม้ไทย'}],
+    '2026-01-16':[{name:'วันครู',type:'thai',desc:'วันระลึกถึงบทบาทและคุณค่าของครู'}],
+    '2026-01-17':[{name:'วันพ่อขุนรามคำแหงมหาราช',type:'thai',desc:'วันรำลึกถึงพระมหากษัตริย์ผู้มีบทบาทสำคัญต่อประวัติศาสตร์ไทย'}],
+    '2026-01-18':[{name:'วันยุทธหัตถี / วันสมเด็จพระนเรศวรมหาราช / วันกองทัพไทย',type:'thai',desc:'วันสำคัญทางประวัติศาสตร์และกองทัพไทย'}],
+    '2026-01-21':[{name:'วันกอดสากล',type:'fun',desc:'วันรณรงค์เรื่องความอบอุ่นและความสัมพันธ์ระหว่างผู้คน'}],
+    '2026-01-23':[{name:'วันเขียนด้วยลายมือ',type:'fun',desc:'วันส่งเสริมการเขียนด้วยมือ'}],
+    '2026-02-02':[{name:'วันนักประดิษฐ์',type:'thai',desc:'วันส่งเสริมสิ่งประดิษฐ์และนวัตกรรมไทย'},{name:'วันพื้นที่ชุ่มน้ำโลก',type:'international',desc:'วันตระหนักถึงความสำคัญของระบบนิเวศพื้นที่ชุ่มน้ำ'}],
+    '2026-02-03':[{name:'วันทหารผ่านศึก',type:'thai',desc:'วันรำลึกและยกย่องทหารผ่านศึก'}],
+    '2026-02-04':[{name:'วันมะเร็งโลก',type:'international',desc:'วันสร้างความตระหนักเรื่องการป้องกันและการดูแลโรคมะเร็ง'}],
+    '2026-02-13':[{name:'วันรักนกเงือก',type:'thai',desc:'วันรณรงค์อนุรักษ์นกเงือกและถิ่นอาศัย'}],
+    '2026-02-14':[{name:'วันวาเลนไทน์',type:'cultural',desc:'วันแห่งความรักและการแสดงความห่วงใย'}],
+    '2026-02-15':[{name:'วันแห่งความโสด',type:'fun',desc:'วันเชิงวัฒนธรรม/กระแสสากลสำหรับคนโสด'}],
+    '2026-02-17':[{name:'วันตรุษจีน / Chinese New Year',type:'cultural',desc:'วันขึ้นปีใหม่ตามปฏิทินจันทรคติจีน; มีความสำคัญทางวัฒนธรรมในไทย'},{name:'วันหยุดราชการพิเศษในพื้นที่จังหวัดสงขลา',type:'holiday',desc:'วันหยุดในพื้นที่ตามประกาศจังหวัด'}],
+    '2026-02-21':[{name:'วันภาษาแม่สากล',type:'international',desc:'วันส่งเสริมความหลากหลายทางภาษาและภาษาท้องถิ่น'}],
+    '2026-02-24':[{name:'วันศิลปินแห่งชาติ',type:'thai',desc:'วันเชิดชูศิลปินไทย'}],
+    '2026-02-26':[{name:'วันสหกรณ์แห่งชาติ',type:'thai',desc:'วันสำคัญของขบวนการสหกรณ์ไทย'}],
+    '2026-03-03':[{name:'วันมาฆบูชา',type:'holiday',desc:'วันสำคัญทางพระพุทธศาสนาและวันหยุดสถาบันการเงิน'},{name:'วันสัตว์ป่าและพืชป่าโลก',type:'international',desc:'วันตระหนักถึงคุณค่าของสัตว์ป่าและพืชป่า'}],
+    '2026-03-05':[{name:'วันนักข่าว',type:'thai',desc:'วันสำคัญของวิชาชีพสื่อมวลชนไทย'}],
+    '2026-03-08':[{name:'วันสตรีสากล',type:'international',desc:'วันส่งเสริมสิทธิและความเท่าเทียมของผู้หญิง'}],
+    '2026-03-13':[{name:'วันช้างไทย',type:'thai',desc:'วันรณรงค์อนุรักษ์ช้างไทย'},{name:'วันนอนหลับโลก',type:'international',desc:'วันสร้างความตระหนักเรื่องคุณภาพและสุขอนามัยการนอน'}],
+    '2026-03-15':[{name:'วันสิทธิผู้บริโภคสากล',type:'international',desc:'วันตระหนักถึงสิทธิและการคุ้มครองผู้บริโภค'}],
+    '2026-03-18':[{name:'วันรีไซเคิลโลก',type:'international',desc:'วันส่งเสริมการใช้ทรัพยากรอย่างคุ้มค่าและการรีไซเคิล'}],
+    '2026-03-20':[{name:'วันอาสาสมัครสาธารณสุขแห่งชาติ',type:'thai',desc:'วันเชิดชูบทบาท อสม.'},{name:'วันอีฎิ้ลฟิตริ / Eid al-Fitr',type:'religious',desc:'วันสำคัญของศาสนาอิสลามหลังสิ้นสุดเดือนรอมฎอน'}],
+    '2026-03-21':[{name:'วันป่าไม้โลก',type:'international',desc:'วันตระหนักถึงคุณค่าของป่าไม้'},{name:'วันกวีนิพนธ์สากล',type:'international',desc:'วันเฉลิมฉลองพลังของภาษาและบทกวี'}],
+    '2026-03-22':[{name:'วันอนุรักษ์น้ำโลก',type:'international',desc:'วันตระหนักถึงการจัดการและการเข้าถึงทรัพยากรน้ำ'}],
+    '2026-03-24':[{name:'วันวัณโรคโลก',type:'international',desc:'วันรณรงค์สร้างความตระหนักเกี่ยวกับวัณโรค'}],
+    '2026-03-25':[{name:'วันวิทยุกระจายเสียงแห่งชาติ',type:'thai',desc:'วันสำคัญด้านกิจการวิทยุกระจายเสียงไทย'}],
+    '2026-03-31':[{name:'วันพระบาทสมเด็จพระนั่งเกล้าเจ้าอยู่หัว',type:'thai',desc:'วันระลึกถึงพระบาทสมเด็จพระนั่งเกล้าเจ้าอยู่หัว'}],
+    '2026-04-01':[{name:'วันออมสินของไทย',type:'thai',desc:'วันสำคัญของธนาคารออมสิน'},{name:'วันข้าราชการพลเรือน',type:'thai',desc:'วันรำลึกบทบาทของข้าราชการพลเรือน'}],
+    '2026-04-02':[{name:'วันอนุรักษ์มรดกไทย',type:'thai',desc:'วันส่งเสริมการอนุรักษ์ศิลปวัฒนธรรมและมรดกไทย'}],
+    '2026-04-06':[{name:'วันจักรี / Chakri Memorial Day',type:'holiday',desc:'วันระลึกถึงพระบาทสมเด็จพระพุทธยอดฟ้าจุฬาโลกมหาราชและราชวงศ์จักรี'}],
+    '2026-04-07':[{name:'วันอนามัยโลก',type:'international',desc:'วันรณรงค์ด้านสุขภาพระดับโลก'}],
+    '2026-04-13':[{name:'วันสงกรานต์',type:'holiday',desc:'เทศกาลปีใหม่ไทยและวันหยุดราชการ/สถาบันการเงิน'},{name:'วันผู้สูงอายุแห่งชาติ',type:'thai',desc:'วันให้ความสำคัญกับผู้สูงอายุไทย'}],
+    '2026-04-14':[{name:'วันสงกรานต์ / วันครอบครัวไทย',type:'holiday',desc:'เทศกาลสงกรานต์และวันครอบครัวไทย'}],
+    '2026-04-15':[{name:'วันสงกรานต์',type:'holiday',desc:'วันหยุดสงกรานต์'}],
+    '2026-04-18':[{name:'วันโบราณสถานสากล',type:'international',desc:'วันตระหนักถึงการอนุรักษ์มรดกทางวัฒนธรรม'}],
+    '2026-04-22':[{name:'วันคุ้มครองโลก',type:'international',desc:'วันรณรงค์ปกป้องสิ่งแวดล้อมและโลก'}],
+    '2026-04-23':[{name:'วันหนังสือและลิขสิทธิ์สากล',type:'international',desc:'วันส่งเสริมการอ่าน หนังสือ และลิขสิทธิ์'}],
+    '2026-04-25':[{name:'วันคล้ายวันสวรรคตสมเด็จพระนเรศวรมหาราช',type:'thai',desc:'วันระลึกถึงสมเด็จพระนเรศวรมหาราช'}],
+    '2026-04-28':[{name:'วันความปลอดภัยและอาชีวอนามัยสากล',type:'international',desc:'วันส่งเสริมความปลอดภัยและสุขภาพในการทำงาน'}],
+    '2026-04-29':[{name:'วันเต้นรำสากล',type:'international',desc:'วันเฉลิมฉลองศิลปะการเต้นรำ'}],
+    '2026-04-30':[{name:'วันคุ้มครองผู้บริโภคไทย',type:'thai',desc:'วันตระหนักถึงสิทธิผู้บริโภคในไทย'}],
+    '2026-05-01':[{name:'วันแรงงานแห่งชาติ / National Labor Day',type:'holiday',desc:'วันสำคัญด้านแรงงานและวันหยุดสถาบันการเงิน'}],
+    '2026-05-03':[{name:'วันเสรีภาพสื่อมวลชนโลก',type:'international',desc:'วันส่งเสริมเสรีภาพของสื่อมวลชน'}],
+    '2026-05-04':[{name:'วันฉัตรมงคล / Coronation Day',type:'holiday',desc:'วันสำคัญและวันหยุดสถาบันการเงิน'}],
+    '2026-05-08':[{name:'วันกาชาดสากล',type:'international',desc:'วันเฉลิมฉลองงานด้านมนุษยธรรมของกาชาดและเสี้ยววงเดือนแดง'}],
+    '2026-05-12':[{name:'วันพยาบาลสากล',type:'international',desc:'วันเชิดชูวิชาชีพการพยาบาล'}],
+    '2026-05-15':[{name:'วันครอบครัวสากล',type:'international',desc:'วันให้ความสำคัญกับครอบครัวในสังคม'}],
+    '2026-05-17':[{name:'วันโทรคมนาคมและสังคมสารสนเทศโลก',type:'international',desc:'วันตระหนักถึงบทบาทเทคโนโลยีการสื่อสาร'}],
+    '2026-05-20':[{name:'วันผึ้งโลก',type:'international',desc:'วันตระหนักถึงบทบาทของผึ้งและแมลงผสมเกสร'}],
+    '2026-05-22':[{name:'วันความหลากหลายทางชีวภาพ',type:'international',desc:'วันรณรงค์ปกป้องความหลากหลายของสิ่งมีชีวิต'}],
+    '2026-05-31':[{name:'วันวิสาขบูชา',type:'holiday',desc:'วันสำคัญสูงสุดวันหนึ่งในพระพุทธศาสนา; ประสูติ ตรัสรู้ และปรินิพพาน'},{name:'วันงดสูบบุหรี่โลก',type:'international',desc:'วันรณรงค์ลดการสูบบุหรี่และผลกระทบต่อสุขภาพ'}],
+    '2026-06-01':[{name:'วันหยุดชดเชยวิสาขบูชา',type:'holiday',desc:'วันหยุดสถาบันการเงินเพื่อชดเชยวันวิสาขบูชา'},{name:'วันดื่มนมโลก',type:'international',desc:'วันส่งเสริมการรับรู้คุณค่าของนมและอุตสาหกรรมนม'}],
+    '2026-06-03':[{name:'วันเฉลิมพระชนมพรรษาสมเด็จพระนางเจ้าฯ พระบรมราชินี',type:'holiday',desc:'วันสำคัญและวันหยุดสถาบันการเงิน'}],
+    '2026-06-05':[{name:'วันสิ่งแวดล้อมโลก',type:'international',desc:'วันรณรงค์ด้านสิ่งแวดล้อมระดับโลก'}],
+    '2026-06-08':[{name:'วันอัฏฐมีบูชา',type:'religious',desc:'วันสำคัญทางพระพุทธศาสนา'},{name:'วันมหาสมุทรโลก',type:'international',desc:'วันตระหนักถึงคุณค่าของมหาสมุทร'}],
+    '2026-06-09':[{name:'วันอานันทมหิดล',type:'thai',desc:'วันรำลึกถึงพระกรณียกิจด้านการแพทย์และสาธารณสุข'}],
+    '2026-06-14':[{name:'วันผู้บริจาคโลหิตโลก',type:'international',desc:'วันขอบคุณผู้บริจาคโลหิตและรณรงค์เรื่องการบริจาค'}],
+    '2026-06-20':[{name:'วันผู้ลี้ภัยโลก',type:'international',desc:'วันตระหนักถึงชีวิตและสิทธิของผู้ลี้ภัย'}],
+    '2026-06-21':[{name:'วันโยคะสากล',type:'international',desc:'วันส่งเสริมการฝึกโยคะเพื่อสุขภาวะและสมดุล'}],
+    '2026-06-24':[{name:'วันเปลี่ยนแปลงการปกครอง',type:'thai',desc:'วันระลึกถึงเหตุการณ์เปลี่ยนแปลงการปกครอง พ.ศ. 2475'}],
+    '2026-06-26':[{name:'วันสุนทรภู่',type:'thai',desc:'วันรำลึกถึงกวีเอกของไทย'},{name:'วันต่อต้านยาเสพติดโลก',type:'international',desc:'วันรณรงค์ต่อต้านยาเสพติด'}],
+    '2026-07-01':[{name:'วันสถาปนาลูกเสือแห่งชาติ',type:'thai',desc:'วันสำคัญของกิจการลูกเสือไทย'}],
+    '2026-07-03':[{name:'วันปลอดถุงพลาสติกสากล',type:'international',desc:'วันลดการใช้พลาสติกแบบใช้ครั้งเดียว'}],
+    '2026-07-11':[{name:'วันประชากรโลก',type:'international',desc:'วันตระหนักถึงประเด็นประชากรและสังคม'}],
+    '2026-07-18':[{name:'วันเนลสัน แมนเดลาสากล',type:'international',desc:'วันส่งเสริมการอุทิศตนเพื่อสังคมและมนุษยธรรม'}],
+    '2026-07-28':[{name:'วันเฉลิมพระชนมพรรษาพระบาทสมเด็จพระเจ้าอยู่หัว',type:'holiday',desc:'วันสำคัญและวันหยุดสถาบันการเงิน'}],
+    '2026-07-29':[{name:'วันอาสาฬหบูชา',type:'holiday',desc:'วันสำคัญทางพระพุทธศาสนาและวันหยุดสถาบันการเงิน'},{name:'วันภาษาไทยแห่งชาติ',type:'thai',desc:'วันส่งเสริมภาษาไทย'}],
+    '2026-07-30':[{name:'วันเข้าพรรษา / Buddhist Lent',type:'religious',desc:'วันเริ่มต้นช่วงจำพรรษาของพระสงฆ์'}],
+    '2026-08-01':[{name:'วันสตรีไทย',type:'thai',desc:'วันส่งเสริมบทบาทและคุณค่าของสตรีไทย'}],
+    '2026-08-04':[{name:'วันสื่อสารแห่งชาติ',type:'thai',desc:'วันสำคัญด้านการสื่อสารของไทย'}],
+    '2026-08-12':[{name:'วันแม่แห่งชาติ',type:'holiday',desc:'วันเฉลิมพระชนมพรรษาสมเด็จพระนางเจ้าสิริกิติ์ฯ และวันแม่แห่งชาติ'}],
+    '2026-08-18':[{name:'วันวิทยาศาสตร์แห่งชาติ',type:'thai',desc:'วันส่งเสริมความรู้และงานด้านวิทยาศาสตร์ของไทย'}],
+    '2026-08-19':[{name:'วันมนุษยธรรมโลก',type:'international',desc:'วันเชิดชูผู้ปฏิบัติงานด้านมนุษยธรรม'}],
+    '2026-08-26':[{name:'วันสุนัขโลก',type:'international',desc:'วันรณรงค์สวัสดิภาพและการดูแลสุนัข'}],
+    '2026-08-27':[{name:'วันสารทจีน',type:'cultural',desc:'เทศกาลสำคัญของชาวไทยเชื้อสายจีน'}],
+    '2026-09-05':[{name:'วันการกุศลสากล',type:'international',desc:'วันส่งเสริมการให้และงานการกุศล'}],
+    '2026-09-08':[{name:'วันการเรียนรู้หนังสือสากล',type:'international',desc:'วันส่งเสริมการรู้หนังสือและการเรียนรู้ตลอดชีวิต'}],
+    '2026-09-10':[{name:'วันป้องกันการฆ่าตัวตายโลก',type:'international',desc:'วันรณรงค์สร้างความตระหนักและป้องกันการสูญเสียจากการฆ่าตัวตาย'}],
+    '2026-09-16':[{name:'วันโอโซนโลก',type:'international',desc:'วันปกป้องชั้นโอโซนของโลก'}],
+    '2026-09-19':[{name:'วันพิพิธภัณฑ์ไทย',type:'thai',desc:'วันส่งเสริมการเรียนรู้และอนุรักษ์มรดกในพิพิธภัณฑ์'}],
+    '2026-09-20':[{name:'วันเยาวชนแห่งชาติ',type:'thai',desc:'วันสำคัญของเยาวชนไทย'}],
+    '2026-09-21':[{name:'วันสันติภาพโลก',type:'international',desc:'วันส่งเสริมสันติภาพและการลดความขัดแย้ง'}],
+    '2026-09-22':[{name:'วันคาร์ฟรีเดย์',type:'international',desc:'วันรณรงค์ลดการใช้รถยนต์และส่งเสริมการเดินทางที่เป็นมิตรต่อสิ่งแวดล้อม'}],
+    '2026-09-24':[{name:'วันมหิดล',type:'thai',desc:'วันรำลึกถึงพระราชดำริและพระกรณียกิจด้านการแพทย์ของสมเด็จพระบรมราชชนก'}],
+    '2026-09-25':[{name:'วันไหว้พระจันทร์',type:'cultural',desc:'เทศกาลสำคัญตามวัฒนธรรมจีน'}],
+    '2026-09-26':[{name:'วันสากลแห่งการขจัดอาวุธนิวเคลียร์',type:'international',desc:'วันรณรงค์สร้างความตระหนักเรื่องอาวุธนิวเคลียร์'}],
+    '2026-09-27':[{name:'วันท่องเที่ยวโลก',type:'international',desc:'วันส่งเสริมความเข้าใจในบทบาทของการท่องเที่ยวต่อสังคมและเศรษฐกิจ'}],
+    '2026-09-28':[{name:'วันพระราชทานธงชาติไทย',type:'thai',desc:'วันระลึกถึงธงชาติไทย'}],
+    '2026-09-29':[{name:'วันหัวใจโลก',type:'international',desc:'วันสร้างความตระหนักเรื่องสุขภาพหัวใจและโรคหัวใจและหลอดเลือด'}],
+    '2026-10-01':[{name:'วันผู้สูงอายุสากล',type:'international',desc:'วันส่งเสริมคุณภาพชีวิตและศักดิ์ศรีของผู้สูงอายุ'},{name:'วันกาแฟสากล',type:'fun',desc:'วันเฉลิมฉลองวัฒนธรรมกาแฟทั่วโลก'}],
+    '2026-10-02':[{name:'วันแห่งการไม่ใช้ความรุนแรง',type:'international',desc:'วันส่งเสริมสันติวิธีและการไม่ใช้ความรุนแรง'}],
+    '2026-10-10':[{name:'วันสุขภาพจิตโลก',type:'international',desc:'วันสร้างความตระหนักและส่งเสริมสุขภาพจิต'},{name:'เทศกาลกินเจ',type:'cultural',desc:'เทศกาลถือศีลและงดอาหารที่กำหนดตามประเพณีจีนในไทย'}],
+    '2026-10-11':[{name:'วันเด็กหญิงสากล',type:'international',desc:'วันส่งเสริมสิทธิและโอกาสของเด็กหญิง'},{name:'เทศกาลกินเจ',type:'cultural',desc:'ช่วงเทศกาลกินเจ'}],
+    '2026-10-12':[{name:'เทศกาลกินเจ',type:'cultural',desc:'ช่วงเทศกาลกินเจ'}],
+    '2026-10-13':[{name:'วันนวมินทรมหาราช',type:'holiday',desc:'วันคล้ายวันสวรรคตพระบาทสมเด็จพระบรมชนกาธิเบศรฯ'},{name:'เทศกาลกินเจ',type:'cultural',desc:'ช่วงเทศกาลกินเจ'}],
+    '2026-10-14':[{name:'วันประชาธิปไตย',type:'thai',desc:'วันสำคัญด้านประชาธิปไตยของไทย'},{name:'เทศกาลกินเจ',type:'cultural',desc:'ช่วงเทศกาลกินเจ'}],
+    '2026-10-15':[{name:'วันล้างมือโลก',type:'international',desc:'วันส่งเสริมการล้างมือเพื่อสุขอนามัย'},{name:'เทศกาลกินเจ',type:'cultural',desc:'ช่วงเทศกาลกินเจ'}],
+    '2026-10-16':[{name:'วันหยุดทำการพิเศษสถาบันการเงินในกรุงเทพมหานคร',type:'holiday',desc:'วันหยุดพิเศษเพื่อการประชุม IMF-WBG Annual Meetings 2026 ในกรุงเทพฯ'},{name:'วันอาหารโลก',type:'international',desc:'วันตระหนักถึงความมั่นคงทางอาหารและโภชนาการ'},{name:'เทศกาลกินเจ',type:'cultural',desc:'ช่วงเทศกาลกินเจ'}],
+    '2026-10-17':[{name:'วันตำรวจ',type:'thai',desc:'วันสำคัญของตำรวจไทย'},{name:'เทศกาลกินเจ',type:'cultural',desc:'ช่วงเทศกาลกินเจ'}],
+    '2026-10-18':[{name:'เทศกาลกินเจ',type:'cultural',desc:'วันช่วงสุดท้ายของเทศกาลกินเจ'}],
+    '2026-10-19':[{name:'วันเทคโนโลยีของไทย',type:'thai',desc:'วันส่งเสริมการตระหนักถึงเทคโนโลยีของไทย'}],
+    '2026-10-21':[{name:'วันพยาบาลแห่งชาติ / วันทันตสาธารณสุขแห่งชาติ',type:'thai',desc:'วันสำคัญด้านสาธารณสุขไทย'}],
+    '2026-10-23':[{name:'วันปิยมหาราช',type:'holiday',desc:'วันคล้ายวันสวรรคตพระบาทสมเด็จพระจุลจอมเกล้าเจ้าอยู่หัว'}],
+    '2026-10-24':[{name:'วันสหประชาชาติ',type:'international',desc:'วันครบรอบการก่อตั้งสหประชาชาติ'}],
+    '2026-10-31':[{name:'วันฮาโลวีน',type:'fun',desc:'เทศกาลวัฒนธรรมร่วมสมัยที่แพร่หลายทั่วโลก'},{name:'วันออมแห่งชาติ',type:'thai',desc:'วันส่งเสริมการออม'}],
+    '2026-11-11':[{name:'วันคนโสด / 11.11',type:'fun',desc:'วันคนโสดที่ได้รับความนิยมและใช้เป็นวันช้อปปิ้งออนไลน์ ไม่ใช่วันหยุดราชการ'}],
+    '2026-11-14':[{name:'วันคนพิการแห่งชาติ',type:'thai',desc:'วันส่งเสริมสิทธิและคุณภาพชีวิตของคนพิการไทย'},{name:'วันเบาหวานโลก',type:'international',desc:'วันสร้างความตระหนักเรื่องโรคเบาหวาน'}],
+    '2026-11-20':[{name:'วันกองทัพเรือ',type:'thai',desc:'วันสำคัญของกองทัพเรือไทย'},{name:'วันเด็กสากล',type:'international',desc:'วันส่งเสริมสิทธิและความเป็นอยู่ที่ดีของเด็ก'}],
+    '2026-11-24':[{name:'วันลอยกระทง',type:'cultural',desc:'เทศกาลไทยในคืนวันเพ็ญเดือนสิบสองตามปฏิทินจันทรคติ; ปี 2569 ตรงกับ 24 พ.ย.'}],
+    '2026-11-25':[{name:'วันวชิราวุธ',type:'thai',desc:'วันรำลึกถึงพระบาทสมเด็จพระมงกุฎเกล้าเจ้าอยู่หัว'},{name:'วันยุติความรุนแรงต่อสตรีสากล',type:'international',desc:'วันรณรงค์ยุติความรุนแรงต่อผู้หญิง'}],
+    '2026-11-27':[{name:'วันสาธารณสุขแห่งชาติ',type:'thai',desc:'วันสำคัญด้านสาธารณสุขไทย'},{name:'Black Friday',type:'fun',desc:'วันช้อปปิ้งที่เป็นที่นิยมทั่วโลก'}],
+    '2026-12-01':[{name:'วันเอดส์โลก',type:'international',desc:'วันรณรงค์ป้องกัน HIV/AIDS และลดการตีตรา'}],
+    '2026-12-03':[{name:'วันคนพิการสากล',type:'international',desc:'วันส่งเสริมสิทธิ การเข้าถึง และการมีส่วนร่วมของคนพิการ'}],
+    '2026-12-04':[{name:'วันสิ่งแวดล้อมไทย',type:'thai',desc:'วันรณรงค์ด้านสิ่งแวดล้อมของประเทศไทย'}],
+    '2026-12-05':[{name:'วันชาติ / วันพ่อแห่งชาติ',type:'thai',desc:'วันชาติไทยและวันพ่อแห่งชาติ; พ.ศ. 2569 ตรงวันเสาร์'}],
+    '2026-12-07':[{name:'วันหยุดชดเชยวันชาติและวันพ่อแห่งชาติ',type:'holiday',desc:'วันหยุดชดเชยสำหรับสถาบันการเงิน'}],
+    '2026-12-09':[{name:'วันต่อต้านคอร์รัปชันสากล',type:'international',desc:'วันรณรงค์ต่อต้านการทุจริต'}],
+    '2026-12-10':[{name:'วันรัฐธรรมนูญ / Constitution Day',type:'holiday',desc:'วันสำคัญของรัฐธรรมนูญไทยและวันหยุดสถาบันการเงิน'}],
+    '2026-12-16':[{name:'วันกีฬาแห่งชาติ',type:'thai',desc:'วันส่งเสริมกีฬาและการออกกำลังกายของไทย'}],
+    '2026-12-25':[{name:'วันคริสต์มาส / Christmas Day',type:'religious',desc:'วันสำคัญในศาสนาคริสต์ที่มีการเฉลิมฉลองทั่วโลก'}],
+    '2026-12-28':[{name:'วันสมเด็จพระเจ้าตากสินมหาราช',type:'thai',desc:'วันรำลึกถึงสมเด็จพระเจ้าตากสินมหาราช'}],
+    '2026-12-31':[{name:'วันสิ้นปี / New Year’s Eve',type:'holiday',desc:'วันสุดท้ายของปีและวันหยุดสถาบันการเงิน'}]
+  };
+  const BANK_HOLIDAYS=new Set(['2026-01-01','2026-01-02','2026-03-03','2026-04-06','2026-04-13','2026-04-14','2026-04-15','2026-05-01','2026-05-04','2026-06-01','2026-06-03','2026-07-28','2026-07-29','2026-08-12','2026-10-13','2026-10-16','2026-10-23','2026-12-07','2026-12-10','2026-12-31']);
+  for(const k of BANK_HOLIDAYS){if(!IMPORTANT_DAYS[k])IMPORTANT_DAYS[k]=[];if(!IMPORTANT_DAYS[k].some(e=>e.type==='holiday'))IMPORTANT_DAYS[k].push({name:'วันหยุดสถาบันการเงิน',type:'holiday',desc:'วันหยุดตามปฏิทินธนาคารแห่งประเทศไทย'});}
+
+  function getEvents(k){return IMPORTANT_DAYS[k]||[]}
+  function formatLongDate(k){const d=new Date(k+'T12:00:00');return `${DAY_NAMES[d.getDay()]}, ${d.getDate()} ${MONTHS[d.getMonth()]} ${d.getFullYear()}`}
+  function escapeText(v){return String(v).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+
+  // Per-day habit state. The template lives in db.habits; completion state lives in db.records[day].habits.
+  const ensureTodayState=()=>{
+    if(!db)return;
+    db.records=db.records||{};
+    const k=localDateKey();
+    const prevKey=localStorage.getItem('habit-tracker-last-day-key-v2');
+    if(prevKey && prevKey!==k && !db.records[prevKey]){
+      db.records[prevKey]={habits:db.habits.map(h=>({id:h.id,name:h.name,emoji:h.emoji,done:!!h.done})),note:''};
+      db.history[prevKey]=db.habits.filter(h=>h.done).length;
+    }
+    if(!db.records[k]||!Array.isArray(db.records[k].habits)){
+      db.records[k]={habits:db.habits.map(h=>({id:h.id,name:h.name,emoji:h.emoji,done:false})),note:db.records[k]?.note||''};
+      db.history[k]=0;
+    }
+    const rec=db.records[k];
+    for(const h of db.habits){const rh=rec.habits.find(x=>x.id===h.id);h.done=!!rh?.done;}
+    db.history[k]=rec.habits.filter(h=>h.done).length;
+    localStorage.setItem('habit-tracker-last-day-key-v2',k);
+  };
+  const todayRecord=()=>{ensureTodayState();return db.records[localDateKey()]};
+  const questHash=(str)=>{let h=2166136261;for(let i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0};
+  const pick=(arr,n)=>arr[n%arr.length];
+  const getDailyQuest=()=>{
+    const k=localDateKey();const rec=todayRecord();
+    if(rec.quest&&rec.quest.version===2)return rec.quest;
+    let seed=questHash(`${currentAuth?.licenseId||'license'}:${k}:quest`);
+    const exercise=[['Push-ups','วิดพื้น'],['Bodyweight squats','สควอต'],['Reverse lunges','ลันจ์ถอยหลัง'],['Mountain climbers','เมาน์เทนไคลม์เบอร์'],['Glute bridges','กลูตบริดจ์'],['Calf raises','เขย่งปลายเท้า'],['Sit-ups','ซิตอัป'],['Burpees','เบอร์พี']];
+    const mode=seed%7;seed=Math.floor(seed/7);
+    let q;
+    if(mode<=3){const ex=pick(exercise,seed);const reps=8+(seed%13);q={version:2,type:'exercise',icon:'⚡',title:`${ex[0]} × ${reps}`,description:`ทำ ${ex[1]} จำนวน ${reps} ครั้ง`,meta:'ออกแบบแบบสุ่มประจำวันนี้ · 8–20 reps'};}
+    else if(mode===4){const mins=5+(seed%16);q={version:2,type:'mindful',icon:'🧘',title:`Meditation · ${mins} min`,description:`นั่งสมาธิหรือฝึกหายใจอย่างสงบ ${mins} นาที`,meta:'เควสสติประจำวัน · 5–20 minutes'};}
+    else if(mode===5){const mins=8+(seed%13);q={version:2,type:'movement',icon:'🚶',title:`Walk · ${mins} min`,description:`เดินต่อเนื่อง ${mins} นาทีแบบไม่เร่งเกินไป`,meta:'ขยับร่างกายให้ครบภารกิจวันนี้'};}
+    else{const choices=[['Hydration reset','💧','ดื่มน้ำ 2 แก้วแบบตั้งใจและพักจากหน้าจอ 5 นาที','รีเซ็ตร่างกายสั้น ๆ'],['Desk reset','🧹','เก็บโต๊ะหรือพื้นที่ทำงานให้เรียบร้อย 8 นาที','ภารกิจจัดสภาพแวดล้อม'],['Reading sprint','📖','อ่านหนังสือหรือบทความ 10 หน้า','ภารกิจเติมความรู้'],['Breathing reset','🌬️','ฝึกหายใจช้า ๆ 2 นาที','ภารกิจรีเซ็ตสมาธิ'],['Sunlight break','☀️','ออกไปรับแสงธรรมชาติ 5 นาที','ภารกิจพักจากหน้าจอ']];const x=pick(choices,seed);q={version:2,type:'life',icon:x[1],title:x[0],description:x[2],meta:x[3]};}
+    q.done=!!rec.quest?.done;rec.quest=q;return q;
+  };
+
+  function renderContext(){
+    const k=localDateKey(),events=getEvents(k),label=document.getElementById('globalDateLabel'),status=document.getElementById('globalDayStatus'),chips=document.getElementById('globalEventChips');
+    if(label)label.textContent=formatLongDate(k);
+    if(status)status.textContent=`${events.length?events.length+' important day'+(events.length>1?'s':'')+' today · ':''}Tasks reset daily · ${k}`;
+    if(chips)chips.innerHTML=events.slice(0,3).map(e=>`<span class="htx-event-chip ${e.type}">${eventTypeIcon[e.type]||'•'} ${escapeText(e.name)}</span>`).join('')+(events.length>3?`<span class="htx-event-chip">+${events.length-3} more</span>`:'');
+    const intel=document.getElementById('intelDateLabel');if(intel)intel.textContent=formatLongDate(k);
+    const count=document.getElementById('intelEventCount');if(count)count.textContent=`${events.length} important day${events.length===1?'':'s'}`;
+    const list=document.getElementById('todayImportantDays');
+    if(list)list.innerHTML=events.length?events.map(e=>`<div class="htx-important-item ${e.type}"><span class="event-icon">${eventTypeIcon[e.type]||'•'}</span><div class="event-copy"><strong>${escapeText(e.name)}</strong><small>${escapeText(e.desc)}</small></div><span class="event-tag">${e.type}</span></div>`).join(''):`<div class="htx-important-item"><span class="event-icon">✓</span><div class="event-copy"><strong>No major observance logged today</strong><small>Just focus on your own routine.</small></div><span class="event-tag">clear</span></div>`;
+  }
+
+  function renderDailyQuest(){
+    const q=getDailyQuest();
+    const t=document.getElementById('questTitle'),d=document.getElementById('questDescription'),m=document.getElementById('questMeta'),i=document.getElementById('questIcon'),b=document.getElementById('questDoneBtn'),st=document.getElementById('questStatus');
+    if(t)t.textContent=q.title;if(d)d.textContent=q.description;if(m)m.textContent=q.meta;if(i)i.textContent=q.icon;
+    if(st)st.textContent=q.done?'QUEST COMPLETE':'1 QUEST · LOCKED FOR TODAY';
+    if(b){b.textContent=q.done?'✓ Quest completed':'Mark quest complete';b.classList.toggle('completed',!!q.done);}
+  }
+  document.getElementById('questDoneBtn')?.addEventListener('click',()=>{const q=getDailyQuest();const rec=todayRecord();q.done=!q.done;rec.quest=q;save();renderDailyQuest()});
+
+  function renderMonthlyStats(){
+    const sel=document.getElementById('monthlyYearSelect'),grid=document.getElementById('monthlySummaryGrid');if(!sel||!grid)return;
+    const years=new Set([new Date().getFullYear()]);
+    for(const k of Object.keys(db.history||{})){const y=Number(k.slice(0,4));if(y)years.add(y)}
+    const yearList=[...years].sort((a,b)=>b-a);sel.innerHTML=yearList.map(y=>`<option value="${y}">${y}</option>`).join('');
+    if(!years.has(monthlyYearState.value))monthlyYearState.value=new Date().getFullYear();sel.value=monthlyYearState.value;
+    const year=monthlyYearState.value;const today=localDateKey();
+    document.getElementById('monthlyYearHint').textContent=`${year} · recorded days only · total habits change safely over time`;
+    grid.innerHTML=MONTHS.map((name,m)=>{
+      const prefix=`${year}-${String(m+1).padStart(2,'0')}-`;const keys=Object.keys(db.records||{}).filter(k=>k.startsWith(prefix));
+      let done=0,possible=0,best=0;for(const k of keys){const r=db.records[k];const arr=Array.isArray(r?.habits)?r.habits:[];const d=arr.filter(h=>h.done).length;done+=d;possible+=arr.length;best=Math.max(best,d)}
+      const rate=possible?Math.round(done/possible*100):0;const current=prefix===today.slice(0,7)+'-';const future=`${year}-${String(m+1).padStart(2,'0')}-`>today.slice(0,7)+'-';
+      return `<article class="monthly-item ${current?'current':''} ${future?'future':''}"><div class="monthly-item-head"><strong>${name.slice(0,3)}</strong><span>${keys.length} days</span></div><div class="monthly-rate">${rate}%</div><div class="monthly-meta"><span>${done} completions</span><span>best ${best}</span></div><div class="monthly-track"><i style="width:${rate}%"></i></div></article>`;
+    }).join('');
+  }
+  document.getElementById('monthlyYearSelect')?.addEventListener('change',e=>{monthlyYearState.value=Number(e.target.value);renderMonthlyStats()});
+
+  function renderCurrentCalendarExtras(){
+    const k=localDateKey(),el=document.getElementById('calendarCurrentDay');if(el)el.textContent=`Today · ${formatLongDate(k)} · click a date for details (tasks stay locked to Today)`;
+  }
+
+  // Replace calendar function by wrapping the original behavior through the same name.
+  const oldRenderCalendar=renderCalendar;
+  renderCalendar=()=>{
+      const y=calDate.getFullYear(),m=calDate.getMonth();
+      const title=document.getElementById('calTitle');if(title)title.textContent=calDate.toLocaleDateString(undefined,{month:'long',year:'numeric'});
+      const mon=document.getElementById('calendarMonth');if(mon)mon.textContent=calDate.toLocaleDateString(undefined,{month:'long'});
+      const grid=document.getElementById('calendarGrid');if(!grid)return;
+      grid.innerHTML='';const first=new Date(y,m,1).getDay(),days=new Date(y,m+1,0).getDate();
+      for(let i=0;i<first;i++){const x=document.createElement('div');x.className='day empty';grid.appendChild(x)}
+      for(let d=1;d<=days;d++){
+        const x=document.createElement('div');const k=`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;const events=getEvents(k);const rec=getDayRecord(k);const count=Array.isArray(rec.habits)?rec.habits.filter(h=>h.done).length:(db.history[k]||0);
+        x.className='day'+(k===localDateKey()?' today':'')+(count>0?' done':'')+(events.length?' important':'')+(events.some(e=>e.type==='holiday')?' holiday':'');x.textContent=d;x.title=`${formatLongDate(k)}\n${count} completed${events.length?'\n\n'+events.map(e=>e.name).join('\n'):''}`;x.dataset.dayKey=k;
+        if(events.length){const dot=document.createElement('span');dot.className='day-event-dot';x.appendChild(dot)}
+        x.onclick=()=>openDayDetail(k);grid.appendChild(x);
+      }
+      renderCurrentCalendarExtras();
+    };
+
+  const oldOpenDayDetail=openDayDetail;
+  openDayDetail=(k)=>{
+      oldOpenDayDetail(k);
+      const box=document.getElementById('dayModalImportant'),events=getEvents(k);
+      if(box)box.innerHTML=events.length?events.map(e=>`<div class="modal-event"><strong>${eventTypeIcon[e.type]||'•'} ${escapeText(e.name)}</strong><small>${escapeText(e.desc)}</small></div>`).join(''):'<div class="modal-event"><small>No important observance recorded for this date.</small></div>';
+    };
+
+  // Patch existing state/render functions so completion always targets Today and rolls over cleanly.
+  toggle=(id)=>{
+    const k=localDateKey();const rec=todayRecord();const h=rec.habits.find(x=>x.id===id);if(!h)return;h.done=!h.done;db.history[k]=rec.habits.filter(x=>x.done).length;
+    const template=db.habits.find(x=>x.id===id);if(template)template.done=h.done;save();render();
+  };
+
+  // Make quick add actually add a new habit instead of editing the first one.
+  const q=document.getElementById('quickAdd');if(q){q.onclick=()=>openModal()}
+  // Keep today's note scoped to today's record.
+  const note=document.getElementById('noteBox');if(note){note.addEventListener('focus',()=>{note.value=todayRecord().note||''});}
+
+  const baseRender=render;
+  render=()=>{
+      ensureTodayState();getDailyQuest();renderContext();renderDailyQuest();baseRender();renderMonthlyStats();renderCurrentCalendarExtras();
+      // Base render may overwrite note with its legacy record getter; restore today's note after it completes.
+      const n=document.getElementById('noteBox');if(n)n.value=todayRecord().note||'';
+      // ensure calendar uses enhanced renderer
+      renderCalendar();
+    };
+
+  // On habit modal save: sync template + create current-day unchecked state for new habit.
+  const saveBtn=document.getElementById('saveBtn');if(saveBtn){saveBtn.addEventListener('click',()=>{setTimeout(()=>{ensureTodayState();const k=localDateKey(),rec=db.records[k];for(const h of db.habits){if(!rec.habits.some(x=>x.id===h.id))rec.habits.push({id:h.id,name:h.name,emoji:h.emoji,done:false})}rec.habits=rec.habits.filter(rh=>db.habits.some(h=>h.id===rh.id));db.history[k]=rec.habits.filter(h=>h.done).length;save();render()},40)})}
+
+  // Refresh at local midnight without carrying checkmarks.
+  const midnightCheck=()=>{const k=localDateKey(),last=localStorage.getItem('habit-tracker-last-day-key-v2');if(last&&last!==k){ensureTodayState();save();render()}setTimeout(midnightCheck,30000)};setTimeout(midnightCheck,30000);
+
+  // Initial patch after DOM is ready / auth has populated db.
+  const boot=()=>{if(!db)return;ensureTodayState();getDailyQuest();renderContext();renderDailyQuest();renderMonthlyStats();renderCurrentCalendarExtras();renderCalendar()};
+  setTimeout(boot,120);setTimeout(boot,1000);
 })();
 </script>
 
