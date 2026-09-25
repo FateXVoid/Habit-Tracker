@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <title>Habit Tracker</title>
 <!-- FINAL PREVIEW: game intro + polished UI shell; original app is mounted after continue. -->
 <style>
@@ -834,30 +835,35 @@ body::after{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;opa
 (() => {
   const intro=document.getElementById('htx-intro'), fill=document.getElementById('htx-fill'), percent=document.getElementById('htx-percent'), status=document.getElementById('htx-status-text'), prompt=document.getElementById('htx-prompt'), flash=document.getElementById('htx-flash'), app=document.getElementById('htx-fallback-app');
   const authGate=document.getElementById('htx-auth-gate'), authForm=document.getElementById('htx-auth-form'), authInput=document.getElementById('htx-key-input'), authBtn=document.getElementById('htx-auth-btn'), authMsg=document.getElementById('htx-auth-msg');
-  const DEVICE_KEY='habit-tracker-device-id-v1', quotes=['Consistency beats intensity when nobody is watching.','Small wins become big changes.','Show up today. Let tomorrow handle itself.','Progress is a system, not a mood.'];
+  const DEVICE_KEY='habit-tracker-device-id-v1', LICENSE_RECOVERY_KEY='habit-tracker-license-recovery-v1', quotes=['Consistency beats intensity when nobody is watching.','Small wins become big changes.','Show up today. Let tomorrow handle itself.','Progress is a system, not a mood.'];
   const defaults={habits:[{id:1,name:'Wake up',detail:'06:00–07:00',emoji:'🌅',done:false},{id:2,name:'Cold shower',detail:'',emoji:'🚿',done:false},{id:3,name:'Read 5 pages',detail:'',emoji:'📖',done:false},{id:4,name:'Work out',detail:'',emoji:'💪',done:false},{id:5,name:'Boxing',detail:'',emoji:'🥊',done:false},{id:6,name:'Work',detail:'',emoji:'💼',done:false},{id:7,name:'Learn a skill',detail:'',emoji:'🎯',done:false},{id:8,name:'Sleep',detail:'22:00–23:00',emoji:'🌙',done:false}],history:{},records:{},quote:quotes[0]};
   const dataKeyPrefix='habit-tracker-v6:';
   let dataKey='', db=null, editId=null, calDate=new Date(), currentAuth=null, ready=false, entering=false, p=0, loadingStarted=false;
   const deviceId=()=>{let id=localStorage.getItem(DEVICE_KEY);if(!id){id=(crypto.randomUUID?crypto.randomUUID():'dev-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2));localStorage.setItem(DEVICE_KEY,id)}return id};
   const SUPABASE_URL='https://avzshytxewxocwrcyxli.supabase.co',SUPABASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhbGciOiJIUzI1NiIsInJlZiI6ImF2enNoeXR4ZXd4b2N3cmN5eGxpIiwiaWF0IjoxNzg5NTQ2NzE4LCJleHAiOjIxMDUxMjI3MTh9.sSd0fM0B2426PE4MBInPpM4flYisTMXfdLUhbCPyBOQ';
   const setAuthMsg=(msg,type='')=>{authMsg.textContent=msg;authMsg.className='htx-auth-msg'+(type?' '+type:'')};
+  const rememberLicenseKey=(key)=>{try{localStorage.setItem(LICENSE_RECOVERY_KEY,String(key||'').trim().toUpperCase())}catch{}};
+  const rememberedLicenseKey=()=>{try{return localStorage.getItem(LICENSE_RECOVERY_KEY)||''}catch{return ''}};
+  const clearRememberedLicenseKey=()=>{try{localStorage.removeItem(LICENSE_RECOVERY_KEY)}catch{}};
   const initDb=()=>{dataKey=dataKeyPrefix+currentAuth.licenseId;db=JSON.parse(localStorage.getItem(dataKey)||'null')||JSON.parse(JSON.stringify(defaults));db.records=db.records||{}};
-  const api=async(url,opts={})=>{const r=await fetch(url,{credentials:'include',headers:{'Content-Type':'application/json',...(opts.headers||{})},...opts});let j=null;try{j=await r.json()}catch{};if(!r.ok)throw new Error(j?.error||'Request failed');return j};
+  const api=async(url,opts={})=>{const r=await fetch(url,{credentials:'include',cache:'no-store',headers:{'Content-Type':'application/json','Cache-Control':'no-cache',...(opts.headers||{})},...opts});let j=null;try{j=await r.json()}catch{};if(!r.ok)throw new Error(j?.error||'Request failed');return j};
   const showAppLogin=()=>{document.body.classList.add('htx-auth-lock');authGate.classList.remove('hidden');intro.classList.add('htx-preauth');app.classList.remove('show');setTimeout(()=>authInput.focus(),30)};
   const showLoading=()=>{document.body.classList.add('htx-auth-lock');authGate.classList.add('hidden');intro.classList.remove('htx-preauth');intro.style.display='grid';startLoading()};
   const states=[[0,'Initializing interface'],[18,'Loading routines'],[38,'Syncing daily data'],[60,'Calibrating focus'],[78,'Preparing your space'],[91,'Verifying local storage'],[100,'System ready']];
   const label=x=>states.reduce((a,v)=>x>=v[0]?v[1]:a,states[0][1]);
   const todayKey=()=>{const d=new Date();const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,'0'),day=String(d.getDate()).padStart(2,'0');return `${y}-${m}-${day}`};
   function renderLicense(s){const e=document.getElementById('licenseDeviceStatus');const role=s.role==='developer'?'Developer key · Unlimited devices':`Device ${s.deviceCount||1}/${s.maxDevices||1}`;if(e)e.textContent=role;const st=document.getElementById('licenseStatus');if(st)st.textContent=`Key ${s.keyMasked||''} · ${s.role==='developer'?'Developer':'User'}`;const ss=document.getElementById('licenseSyncStatus');if(ss){ss.textContent='Cloud sync · Active';ss.className='sync-status ok'}}
-  document.getElementById('logoutDeviceBtn').onclick=async()=>{if(!confirm('Log out this device? You will need the key again on this device.'))return;try{await api('/api/auth?action=logout',{method:'POST',body:JSON.stringify({deviceId:deviceId()})});location.reload()}catch(e){alert(e.message||'Could not log out device.')}};
+  const logoutThisDevice=async()=>{if(!confirm('Log out this device? You will need the key again on this device.'))return;try{await api('/api/auth?action=logout',{method:'POST',body:JSON.stringify({deviceId:deviceId()})});clearRememberedLicenseKey();location.reload()}catch(e){alert(e.message||'Could not log out device.')}};
+  document.getElementById('logoutDeviceBtn').onclick=logoutThisDevice;
   const SYNC_META=()=>`habit-tracker-license-sync-updated-v1:${currentAuth?.licenseId||'none'}`;
   const LICENSE_SYNC_CODE=()=>`license-${currentAuth?.licenseId||'none'}`;
   let licenseSyncReady=false,licenseSyncTimer=null,licenseSyncBusy=false;
   const localSave=()=>{localStorage.setItem(dataKey,JSON.stringify(db));localStorage.setItem(SYNC_META(),String(Date.now()))};
   const save=()=>{localSave();if(licenseSyncReady){clearTimeout(licenseSyncTimer);licenseSyncTimer=setTimeout(()=>pushLicenseSync(),450)}};
   const setLicenseSyncStatus=(t,c='')=>{const e=document.getElementById('licenseSyncStatus');if(e){e.textContent=t;e.className='sync-status'+(c?' '+c:'')}};
-  async function fetchSyncRow(code){const res=await fetch(SUPABASE_URL+'/rest/v1/habit_tracker_sync?sync_code=eq.'+encodeURIComponent(code)+'&select=data,updated_at',{headers:{apikey:SUPABASE_ANON_KEY,Authorization:'Bearer '+SUPABASE_ANON_KEY}});if(!res.ok)throw new Error('sync fetch failed');const rows=await res.json();return rows[0]||null}
-  async function pushSyncRow(code){const updatedAt=Date.now();localStorage.setItem(SYNC_META(),String(updatedAt));const res=await fetch(SUPABASE_URL+'/rest/v1/habit_tracker_sync',{method:'POST',headers:{apikey:SUPABASE_ANON_KEY,Authorization:'Bearer '+SUPABASE_ANON_KEY,'Content-Type':'application/json',Prefer:'resolution=merge-duplicates,return=minimal'},body:JSON.stringify({sync_code:code,data:{app:'habit-tracker-v6',db,updatedAt},updated_at:new Date(updatedAt).toISOString()})});if(!res.ok)throw new Error('sync push failed')}
+  const syncFetch=async(url,opts={})=>{const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),8000);try{return await fetch(url,{cache:'no-store',...opts,signal:controller.signal})}finally{clearTimeout(timer)}};
+  async function fetchSyncRow(code){const res=await syncFetch(SUPABASE_URL+'/rest/v1/habit_tracker_sync?sync_code=eq.'+encodeURIComponent(code)+'&select=data,updated_at',{headers:{apikey:SUPABASE_ANON_KEY,Authorization:'Bearer '+SUPABASE_ANON_KEY}});if(!res.ok)throw new Error('sync fetch failed');const rows=await res.json();return rows[0]||null}
+  async function pushSyncRow(code){const updatedAt=Date.now();localStorage.setItem(SYNC_META(),String(updatedAt));const res=await syncFetch(SUPABASE_URL+'/rest/v1/habit_tracker_sync',{method:'POST',headers:{apikey:SUPABASE_ANON_KEY,Authorization:'Bearer '+SUPABASE_ANON_KEY,'Content-Type':'application/json',Prefer:'resolution=merge-duplicates,return=minimal'},body:JSON.stringify({sync_code:code,data:{app:'habit-tracker-v6',db,updatedAt},updated_at:new Date(updatedAt).toISOString()})});if(!res.ok)throw new Error('sync push failed')}
   async function pushLicenseSync(){if(!currentAuth?.licenseId||!licenseSyncReady||licenseSyncBusy)return false;licenseSyncBusy=true;try{await pushSyncRow(LICENSE_SYNC_CODE());setLicenseSyncStatus('Cloud sync · Saved','ok');return true}catch(e){setLicenseSyncStatus('Cloud sync · Retry pending','err');return false}finally{licenseSyncBusy=false}}
   async function pullLicenseSync(){if(!currentAuth?.licenseId||licenseSyncBusy)return false;licenseSyncBusy=true;try{const code=LICENSE_SYNC_CODE();let row=await fetchSyncRow(code);if(!row?.data){const legacyKey=`habit-tracker-sync-code-v1:${currentAuth.licenseId}`;const legacyCode=localStorage.getItem(legacyKey)||'';if(legacyCode){try{row=await fetchSyncRow(legacyCode)}catch{}if(row?.data?.db){db=row.data.db;localStorage.setItem(dataKey,JSON.stringify(db));localStorage.setItem(SYNC_META(),String(new Date(row.updated_at).getTime()||row.data.updatedAt||Date.now()));await pushSyncRow(code);localStorage.removeItem(legacyKey);setLicenseSyncStatus('Cloud sync · Migrated','ok');return true}}}if(!row?.data?.db){await pushSyncRow(code);setLicenseSyncStatus('Cloud sync · Active','ok');return false}const remoteAt=new Date(row.updated_at).getTime()||Number(row.data.updatedAt)||0;const localAt=Number(localStorage.getItem(SYNC_META())||0);if(remoteAt>localAt){db=row.data.db;localStorage.setItem(dataKey,JSON.stringify(db));localStorage.setItem(SYNC_META(),String(remoteAt));setLicenseSyncStatus('Cloud sync · Updated','ok');return true}if(localAt>remoteAt)await pushSyncRow(code);setLicenseSyncStatus('Cloud sync · Active','ok');return false}catch(e){setLicenseSyncStatus('Cloud sync · Offline, local data safe','err');return false}finally{licenseSyncBusy=false}}
   async function reconcileLicenseSync(){licenseSyncReady=false;const applied=await pullLicenseSync();licenseSyncReady=true;clearInterval(window.__habitLicensePullTimer);window.__habitLicensePullTimer=setInterval(async()=>{const changed=await pullLicenseSync();if(changed)render()},15000);window.addEventListener('pagehide',()=>{pushLicenseSync()},{once:true});return applied}
@@ -879,10 +885,19 @@ body::after{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;opa
 
   function startLoading(){if(loadingStarted)return;loadingStarted=true;ready=false;entering=false;p=0;fill.style.width='0%';percent.textContent='0%';status.textContent='Initializing interface';prompt.classList.remove('ready');const timer=setInterval(()=>{p=Math.min(100,p+Math.max(1,Math.round((100-p)*.075)));if(p>98)p=100;fill.style.width=p+'%';percent.textContent=p+'%';status.textContent=label(p);if(p>=100){clearInterval(timer);setTimeout(finish,120)}},55);setTimeout(finish,4200)}
   function finish(){if(ready)return;ready=true;p=100;fill.style.width='100%';percent.textContent='100%';status.textContent='System ready';prompt.classList.add('ready')}
-  function enter(){if(!ready||entering)return;entering=true;document.removeEventListener('keydown',key);intro.removeEventListener('pointerdown',enter);flash.classList.add('fire');prompt.classList.remove('ready');app.classList.add('show');document.body.classList.remove('htx-auth-lock');document.body.style.overflow='auto';intro.classList.add('htx-leave');setTimeout(()=>intro.remove(),850);render()}
+  function enter(){if(!ready||entering)return;entering=true;document.removeEventListener('keydown',key);intro.removeEventListener('pointerdown',enter);flash.classList.add('fire');prompt.classList.remove('ready');app.classList.add('show');document.body.classList.remove('htx-auth-lock');document.body.style.overflow='auto';intro.classList.add('htx-leave');setTimeout(()=>intro.remove(),850);try{render()}catch(err){console.warn(err)};setTimeout(()=>{try{forceEnhancementRefresh()}catch{}},0);setTimeout(()=>{try{forceEnhancementRefresh()}catch{}},500)}
   function key(e){if(e.code==='Enter'||e.code==='Space'){e.preventDefault();enter()}}
-  async function bootstrapAuth(){try{const s=await api('/api/auth?action=session',{method:'GET'});if(s.authenticated){currentAuth=s;initDb();await reconcileLicenseSync();renderLicense(s);showLoading();return}showAppLogin()}catch(e){showAppLogin();setAuthMsg('Could not verify access. Please try again.','err')}}
-  authForm.addEventListener('submit',async e=>{e.preventDefault();const keyValue=authInput.value.trim();if(!keyValue)return;authBtn.disabled=true;setAuthMsg('Verifying key…');try{const s=await api('/api/auth?action=login',{method:'POST',body:JSON.stringify({key:keyValue,deviceId:deviceId()})});currentAuth=s;initDb();authInput.value='';setAuthMsg('Access granted.','ok');await reconcileLicenseSync();renderLicense(s);setTimeout(showLoading,180)}catch(err){setAuthMsg(err.message||'Invalid key.','err')}finally{authBtn.disabled=false}});
+  const afterAuth=async(s)=>{currentAuth=s;initDb();renderLicense(s);showLoading();setTimeout(()=>{try{render();}catch{}},180);try{await reconcileLicenseSync();if(db){try{render()}catch{}}}catch{} };
+  async function silentRestore(){const keyValue=rememberedLicenseKey();if(!keyValue)return false;try{setAuthMsg('Restoring your account…');const s=await api('/api/auth?action=login',{method:'POST',body:JSON.stringify({key:keyValue,deviceId:deviceId()})});rememberLicenseKey(keyValue);await afterAuth(s);return true}catch{return false}}
+  async function bootstrapAuth(){
+    try{
+      const s=await api('/api/auth?action=session',{method:'GET'});
+      if(s.authenticated){await afterAuth(s);return}
+    }catch{}
+    if(await silentRestore())return;
+    showAppLogin();
+  }
+  authForm.addEventListener('submit',async e=>{e.preventDefault();const keyValue=authInput.value.trim();if(!keyValue)return;authBtn.disabled=true;setAuthMsg('Verifying key…');try{const s=await api('/api/auth?action=login',{method:'POST',body:JSON.stringify({key:keyValue,deviceId:deviceId()})});rememberLicenseKey(keyValue);authInput.value='';setAuthMsg('Access granted.','ok');await afterAuth(s)}catch(err){setAuthMsg(err.message||'Invalid key.','err')}finally{authBtn.disabled=false}});
   document.addEventListener('keydown',key);intro.addEventListener('pointerdown',enter);
   document.body.classList.add('htx-auth-lock');bootstrapAuth();
 
@@ -1164,6 +1179,24 @@ document.getElementById('exportBtn').onclick=()=>{const blob=new Blob([JSON.stri
   // Keep today's note scoped to today's record.
   const note=document.getElementById('noteBox');if(note){note.addEventListener('focus',()=>{note.value=todayRecord().note||''});}
 
+  const forceEnhancementRefresh=()=>{
+    if(!db||!currentAuth)return false;
+    try{
+      ensureTodayState();
+      getDailyQuest();
+      renderContext();
+      renderDailyQuest();
+      renderMonthlyStats();
+      renderCurrentCalendarExtras();
+      renderCalendar();
+      return true;
+    }catch(err){
+      console.warn('Habit Tracker UI refresh failed',err);
+      return false;
+    }
+  };
+  window.__habitForceEnhancementRefresh=forceEnhancementRefresh;
+
   const baseRender=render;
   render=()=>{
       ensureTodayState();getDailyQuest();renderContext();renderDailyQuest();baseRender();renderMonthlyStats();renderCurrentCalendarExtras();
@@ -1179,9 +1212,53 @@ document.getElementById('exportBtn').onclick=()=>{const blob=new Blob([JSON.stri
   // Refresh at local midnight without carrying checkmarks.
   const midnightCheck=()=>{const k=localDateKey(),last=localStorage.getItem('habit-tracker-last-day-key-v2');if(last&&last!==k){ensureTodayState();save();render()}setTimeout(midnightCheck,30000)};setTimeout(midnightCheck,30000);
 
-  // Initial patch after DOM is ready / auth has populated db.
-  const boot=()=>{if(!db)return;ensureTodayState();getDailyQuest();renderContext();renderDailyQuest();renderMonthlyStats();renderCurrentCalendarExtras();renderCalendar()};
-  setTimeout(boot,120);setTimeout(boot,1000);
+  // Initial patch after auth is populated. Retry briefly to avoid races with session/sync restoration.
+  let bootAttempts=0;
+  const boot=()=>{
+    bootAttempts++;
+    if(db){
+      forceEnhancementRefresh();
+      if(bootAttempts>=10)clearInterval(window.__habitBootWatch);
+    }
+    if(bootAttempts>=30)clearInterval(window.__habitBootWatch);
+  };
+  window.__habitBootWatch=setInterval(boot,250);
+  setTimeout(()=>{forceEnhancementRefresh();},120);
+  setTimeout(()=>{forceEnhancementRefresh();},900);
+})();
+</script>
+
+<script id="ui-boot-safety">
+(()=>{
+  const names=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const quests=[
+    ['Push-ups','วิดพื้น','ทำวิดพื้น 12 ครั้ง','⚡'],
+    ['Bodyweight squats','สควอต','ทำสควอต 15 ครั้ง','🔥'],
+    ['Reverse lunges','ลันจ์ถอยหลัง','ทำลันจ์ถอยหลัง 10 ครั้ง','🦵'],
+    ['Mountain climbers','เมาน์เทนไคลม์เบอร์','ทำเมาน์เทนไคลม์เบอร์ 12 ครั้ง','⚡'],
+    ['Glute bridges','กลูตบริดจ์','ทำกลูตบริดจ์ 18 ครั้ง','🍑'],
+    ['Calf raises','เขย่งปลายเท้า','ทำ calf raises 20 ครั้ง','🦶'],
+    ['Sit-ups','ซิตอัป','ทำซิตอัป 10 ครั้ง','🔥'],
+    ['Meditation','สมาธิ','นั่งสมาธิหรือฝึกหายใจ 10 นาที','🧘'],
+    ['Walk','เดิน','เดินต่อเนื่อง 12 นาที','🚶'],
+    ['Reading sprint','อ่านหนังสือ','อ่านหนังสือหรือบทความ 10 หน้า','📖'],
+    ['Desk reset','จัดโต๊ะ','เก็บโต๊ะหรือพื้นที่ทำงาน 8 นาที','🧹'],
+    ['Hydration reset','ดื่มน้ำ','ดื่มน้ำ 2 แก้วแล้วพักสายตา 5 นาที','💧']
+  ];
+  const hash=(x)=>{let h=2166136261;for(let i=0;i<x.length;i++){h^=x.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0};
+  const paint=()=>{
+    const now=new Date(),k=now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0')+'-'+String(now.getDate()).padStart(2,'0');
+    const date=`${days[now.getDay()]}, ${now.getDate()} ${names[now.getMonth()]} ${now.getFullYear()}`;
+    const dl=document.getElementById('globalDateLabel');if(dl && (!dl.textContent || /loading date/i.test(dl.textContent)))dl.textContent=date;
+    const gs=document.getElementById('globalDayStatus');if(gs && (!gs.textContent || /loading/i.test(gs.textContent)))gs.textContent=`Tasks reset daily · ${k}`;
+    const q=quests[hash(k)%quests.length];
+    const qt=document.getElementById('questTitle');if(qt && (!qt.textContent || /preparing|loading/i.test(qt.textContent)))qt.textContent=q[0];
+    const qd=document.getElementById('questDescription');if(qd && (!qd.textContent || /loading/i.test(qd.textContent)))qd.textContent=q[2];
+    const qm=document.getElementById('questMeta');if(qm && (!qm.textContent || /loading/i.test(qm.textContent)))qm.textContent='Daily quest · 1 quest / day';
+    const qi=document.getElementById('questIcon');if(qi && (!qi.textContent || q[0]===''))qi.textContent=q[3];
+  };
+  paint();setTimeout(paint,150);setTimeout(paint,500);setTimeout(paint,1200);setTimeout(paint,2500);
 })();
 </script>
 
